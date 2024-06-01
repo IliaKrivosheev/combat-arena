@@ -1,4 +1,4 @@
-import "../../node_modules/prismjs/themes/prism.min.css";
+import "../node_modules/prismjs/themes/prism.min.css";
 import "jsvectormap/dist/css/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "../css/style.css";
