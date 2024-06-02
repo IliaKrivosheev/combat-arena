@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/admin-layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>
+         Отчеты | Combat Arena
+    </title>
+    <link rel="icon" th:href="@{/images/favicon.ico}">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body x-data="{ page: 'analytics', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+      x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMode'));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+      :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+<!-- ===== Main Content Start ===== -->
+<main layout:fragment="content">
+    <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+            <!-- Card Item Start -->
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
+                <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                    <svg class="fill-primary dark:fill-white"
+                         width="22"
+                         height="16"
+                         viewBox="0 0 22 16"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 15.1156C4.19376 15.1156 0.825012 8.61876 0.687512 8.34376C0.584387 8.13751 0.584387 7.86251 0.687512 7.65626C0.825012 7.38126 4.19376 0.918762 11 0.918762C17.8063 0.918762 21.175 7.38126 21.3125 7.65626C21.4156 7.86251 21.4156 8.13751 21.3125 8.34376C21.175 8.61876 17.8063 15.1156 11 15.1156ZM2.26876 8.00001C3.02501 9.27189 5.98126 13.5688 11 13.5688C16.0188 13.5688 18.975 9.27189 19.7313 8.00001C18.975 6.72814 16.0188 2.43126 11 2.43126C5.98126 2.43126 3.02501 6.72814 2.26876 8.00001Z"
+                              fill=""/>
+                        <path d="M11 10.9219C9.38438 10.9219 8.07812 9.61562 8.07812 8C8.07812 6.38438 9.38438 5.07812 11 5.07812C12.6156 5.07812 13.9219 6.38438 13.9219 8C13.9219 9.61562 12.6156 10.9219 11 10.9219ZM11 6.625C10.2437 6.625 9.625 7.24375 9.625 8C9.625 8.75625 10.2437 9.375 11 9.375C11.7563 9.375 12.375 8.75625 12.375 8C12.375 7.24375 11.7563 6.625 11 6.625Z"
+                              fill=""/>
+                    </svg>
+                </div>
+
+                <div class="mt-4 flex items-end justify-between">
+                    <div>
+                        <h4 class="text-title-md font-bold text-black dark:text-white">
+                            3.456K
+                        </h4>
+                        <span class="text-sm font-medium">Всего участников</span>
+                    </div>
+
+                    <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
+                    0.43%
+                    <svg class="fill-meta-3"
+                         width="10"
+                         height="11"
+                         viewBox="0 0 10 11"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
+                            fill=""/>
+                    </svg>
+                  </span>
+                </div>
+            </div>
+            <!-- Card Item End -->
+
+            <!-- Card Item Start -->
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
+                <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                    <svg class="fill-primary dark:fill-white"
+                         width="20"
+                         height="22"
+                         viewBox="0 0 20 22"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.7531 16.4312C10.3781 16.4312 9.27808 17.5312 9.27808 18.9062C9.27808 20.2812 10.3781 21.3812 11.7531 21.3812C13.1281 21.3812 14.2281 20.2812 14.2281 18.9062C14.2281 17.5656 13.0937 16.4312 11.7531 16.4312ZM11.7531 19.8687C11.2375 19.8687 10.825 19.4562 10.825 18.9406C10.825 18.425 11.2375 18.0125 11.7531 18.0125C12.2687 18.0125 12.6812 18.425 12.6812 18.9406C12.6812 19.4219 12.2343 19.8687 11.7531 19.8687Z"
+                              fill=""/>
+                        <path d="M5.22183 16.4312C3.84683 16.4312 2.74683 17.5312 2.74683 18.9062C2.74683 20.2812 3.84683 21.3812 5.22183 21.3812C6.59683 21.3812 7.69683 20.2812 7.69683 18.9062C7.69683 17.5656 6.56245 16.4312 5.22183 16.4312ZM5.22183 19.8687C4.7062 19.8687 4.2937 19.4562 4.2937 18.9406C4.2937 18.425 4.7062 18.0125 5.22183 18.0125C5.73745 18.0125 6.14995 18.425 6.14995 18.9406C6.14995 19.4219 5.73745 19.8687 5.22183 19.8687Z"
+                              fill=""/>
+                        <path d="M19.0062 0.618744H17.15C16.325 0.618744 15.6031 1.23749 15.5 2.06249L14.95 6.01562H1.37185C1.0281 6.01562 0.684353 6.18749 0.443728 6.46249C0.237478 6.73749 0.134353 7.11562 0.237478 7.45937C0.237478 7.49374 0.237478 7.49374 0.237478 7.52812L2.36873 13.9562C2.50623 14.4375 2.9531 14.7812 3.46873 14.7812H12.9562C14.2281 14.7812 15.3281 13.8187 15.5 12.5469L16.9437 2.26874C16.9437 2.19999 17.0125 2.16562 17.0812 2.16562H18.9375C19.35 2.16562 19.7281 1.82187 19.7281 1.37499C19.7281 0.928119 19.4187 0.618744 19.0062 0.618744ZM14.0219 12.3062C13.9531 12.8219 13.5062 13.2 12.9906 13.2H3.7781L1.92185 7.56249H14.7094L14.0219 12.3062Z"
+                              fill=""/>
+                    </svg>
+                </div>
+
+                <div class="mt-4 flex items-end justify-between">
+                    <div>
+                        <h4 class="text-title-md font-bold text-black dark:text-white">
+                            45.2K
+                        </h4>
+                        <span class="text-sm font-medium">Всего турниров</span>
+                    </div>
+
+                    <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
+                    4.35%
+                    <svg class="fill-meta-3"
+                         width="10"
+                         height="11"
+                         viewBox="0 0 10 11"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
+                            fill=""/>
+                    </svg>
+                  </span>
+                </div>
+            </div>
+            <!-- Card Item End -->
+
+            <!-- Card Item Start -->
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
+                <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                    <svg class="fill-primary dark:fill-white"
+                         width="22"
+                         height="22"
+                         viewBox="4 1 20 21"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.0319 6.96253C22.0319 7.84233 21.3187 8.55555 20.4389 8.55555C19.5591 8.55555 18.8458 7.84233 18.8458 6.96253C18.8458 6.08273 19.5591 5.36951 20.4389 5.36951C21.3187 5.36951 22.0319 6.08273 22.0319 6.96253Z"
+                              stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+                        <mask id="path-2-inside-1_912_1868" fill="white">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M17.5581 17.987C18.134 18.5067 18.8969 18.823 19.7337 18.8229H19.7491C21.5429 18.8229 22.997 17.3688 22.997 15.575V10.8694C22.997 10.3814 22.6013 9.98572 22.1133 9.98572H16.9584C17.4406 9.99765 17.8221 10.3979 17.8109 10.8801V16.2471C17.825 16.8544 17.7354 17.4401 17.5581 17.987Z"/>
+                        </mask>
+                        <path d="M19.7337 18.8229V17.8229H19.7336L19.7337 18.8229ZM17.5581 17.987L16.6068 17.6787L16.407 18.2952L16.8882 18.7294L17.5581 17.987ZM16.9584 9.98572V8.98572L16.9336 10.9854L16.9584 9.98572ZM17.8109 10.8801L16.8112 10.857L16.8109 10.8686V10.8801H17.8109ZM17.8109 16.2471H16.8109V16.2587L16.8112 16.2704L17.8109 16.2471ZM19.7336 17.8229C19.1538 17.823 18.6273 17.6049 18.2281 17.2446L16.8882 18.7294C17.6407 19.4085 18.6401 19.8231 19.7339 19.8229L19.7336 17.8229ZM19.7491 17.8229H19.7337V19.8229H19.7491V17.8229ZM21.997 15.575C21.997 16.8165 20.9906 17.8229 19.7491 17.8229V19.8229C22.0951 19.8229 23.997 17.9211 23.997 15.575H21.997ZM21.997 10.8694V15.575H23.997V10.8694H21.997ZM22.1133 10.9857C22.0491 10.9857 21.997 10.9337 21.997 10.8694H23.997C23.997 9.82908 23.1536 8.98572 22.1133 8.98572V10.9857ZM16.9584 10.9857H22.1133V8.98572H16.9584V10.9857ZM18.8106 10.9033C18.8346 9.86952 18.0169 9.01161 16.9831 8.98602L16.9336 10.9854C16.8644 10.9837 16.8096 10.9262 16.8112 10.857L18.8106 10.9033ZM18.8109 16.2471V10.8801H16.8109V16.2471H18.8109ZM18.5094 18.2953C18.7209 17.6428 18.8274 16.9452 18.8106 16.2239L16.8112 16.2704C16.8227 16.7637 16.7499 17.2373 16.6068 17.6787L18.5094 18.2953Z"
+                              fill="#000000" mask="url(#path-2-inside-1_912_1868)"/>
+                        <mask id="path-4-inside-2_912_1868" fill="white">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M15.9503 6.02325C15.9503 7.14067 15.0445 8.04651 13.9271 8.04651C13.6783 8.04651 13.44 8.0016 13.2198 7.91946C13.2261 7.96126 13.2294 8.00405 13.2294 8.04761V8.96561C13.4534 9.01851 13.687 9.04651 13.9271 9.04651C15.5968 9.04651 16.9503 7.69295 16.9503 6.02325C16.9503 4.35356 15.5968 3 13.9271 3C12.2574 3 10.9038 4.35356 10.9038 6.02325C10.9038 6.43876 10.9877 6.8347 11.1393 7.19506H12.2775C12.0422 6.86442 11.9038 6.45999 11.9038 6.02325C11.9038 4.90584 12.8097 4 13.9271 4C15.0445 4 15.9503 4.90584 15.9503 6.02325Z"/>
+                        </mask>
+                        <path d="M13.2198 7.91946L13.5694 6.98255C13.2375 6.85871 12.8649 6.91971 12.5898 7.14292C12.3147 7.36613 12.1782 7.71823 12.231 8.06853L13.2198 7.91946ZM13.2294 8.96561H12.2294C12.2294 9.42933 12.5482 9.83222 12.9995 9.93882L13.2294 8.96561ZM11.1393 7.19506L10.2176 7.58296C10.3737 7.95386 10.7369 8.19506 11.1393 8.19506V7.19506ZM12.2775 7.19506V8.19506C12.6518 8.19506 12.9947 7.98606 13.1663 7.65342C13.3378 7.32078 13.3093 6.92018 13.0923 6.61524L12.2775 7.19506ZM13.9271 9.04651C15.5968 9.04651 16.9503 7.69295 16.9503 6.02325H14.9503C14.9503 6.58838 14.4922 7.04651 13.9271 7.04651V9.04651ZM12.8703 8.85636C13.2005 8.9796 13.5571 9.04651 13.9271 9.04651V7.04651C13.7995 7.04651 13.6794 7.0236 13.5694 6.98255L12.8703 8.85636ZM12.231 8.06853C12.2299 8.06116 12.2294 8.05412 12.2294 8.04761H14.2294C14.2294 7.95399 14.2224 7.86136 14.2087 7.77038L12.231 8.06853ZM12.2294 8.04761V8.96561H14.2294V8.04761H12.2294ZM13.9271 8.04651C13.7649 8.04651 13.6085 8.02763 13.4593 7.99239L12.9995 9.93882C13.2983 10.0094 13.609 10.0465 13.9271 10.0465V8.04651ZM15.9503 6.02325C15.9503 7.14067 15.0445 8.04651 13.9271 8.04651V10.0465C16.1491 10.0465 17.9503 8.24524 17.9503 6.02325H15.9503ZM13.9271 4C15.0445 4 15.9503 4.90584 15.9503 6.02325H17.9503C17.9503 3.80127 16.1491 2 13.9271 2V4ZM11.9038 6.02325C11.9038 4.90584 12.8097 4 13.9271 4V2C11.7051 2 9.90384 3.80127 9.90384 6.02325H11.9038ZM12.061 6.80717C11.9601 6.56739 11.9038 6.30317 11.9038 6.02325H9.90384C9.90384 6.57436 10.0152 7.102 10.2176 7.58296L12.061 6.80717ZM11.1393 8.19506H12.2775V6.19506H11.1393V8.19506ZM10.9038 6.02325C10.9038 6.67457 11.1109 7.28049 11.4628 7.77488L13.0923 6.61524C12.9735 6.44834 12.9038 6.24542 12.9038 6.02325H10.9038ZM13.9271 3C12.2574 3 10.9038 4.35356 10.9038 6.02325H12.9038C12.9038 5.45813 13.362 5 13.9271 5V3ZM16.9503 6.02325C16.9503 4.35356 15.5968 3 13.9271 3V5C14.4922 5 14.9503 5.45813 14.9503 6.02325H16.9503Z"
+                              fill="#000000" mask="url(#path-4-inside-2_912_1868)"/>
+                        <mask id="path-6-inside-3_912_1868" fill="white">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M8.68371 17.4276C9.16343 19.7674 11.2055 21.5527 13.6947 21.6136C16.5887 21.5428 18.8783 19.1412 18.811 16.2471V10.8801C18.8221 10.3979 18.4407 9.99765 17.9584 9.98572H13.2295V16.5751C13.2295 17.0367 12.8626 17.4127 12.4044 17.4272C12.3953 17.4275 12.3862 17.4276 12.377 17.4276C12.3769 17.4276 12.3769 17.4276 12.3768 17.4276H8.68371Z"/>
+                        </mask>
+                        <path d="M8.68371 17.4276V16.4276C8.38327 16.4276 8.09876 16.5627 7.90884 16.7955C7.71893 17.0283 7.64375 17.3341 7.70409 17.6285L8.68371 17.4276ZM13.6947 21.6136L13.6702 22.6133C13.6865 22.6137 13.7029 22.6137 13.7192 22.6133L13.6947 21.6136ZM18.811 16.2471H17.811C17.811 16.2549 17.8111 16.2626 17.8112 16.2704L18.811 16.2471ZM18.811 10.8801L17.8112 10.857C17.8111 10.8647 17.811 10.8724 17.811 10.8801H18.811ZM17.9584 9.98572L17.9832 8.98602C17.9749 8.98582 17.9667 8.98572 17.9584 8.98572V9.98572ZM13.2295 9.98572V8.98572C12.6772 8.98572 12.2295 9.43343 12.2295 9.98572H13.2295ZM12.377 17.4276V16.4276L12.373 16.4276L12.377 17.4276ZM12.3768 17.4276V18.4276L12.3808 18.4276L12.3768 17.4276ZM7.70409 17.6285C8.27528 20.4144 10.7053 22.5408 13.6702 22.6133L13.7192 20.6139C11.7057 20.5646 10.0516 19.1204 9.66333 17.2268L7.70409 17.6285ZM13.7192 22.6133C17.1648 22.529 19.8909 19.6696 19.8107 16.2239L17.8112 16.2704C17.8657 18.6128 16.0126 20.5566 13.6702 20.6139L13.7192 22.6133ZM19.811 16.2471V10.8801H17.811V16.2471H19.811ZM19.8107 10.9033C19.8346 9.86953 19.0169 9.01161 17.9832 8.98602L17.9337 10.9854C17.8644 10.9837 17.8096 10.9262 17.8112 10.857L19.8107 10.9033ZM17.9584 8.98572H13.2295V10.9857H17.9584V8.98572ZM12.2295 9.98572V16.5751H14.2295V9.98572H12.2295ZM12.2295 16.5751C12.2295 16.4936 12.2955 16.4276 12.377 16.4276V18.4276C13.4001 18.4276 14.2295 17.5982 14.2295 16.5751H12.2295ZM12.373 16.4276L12.3729 16.4276L12.3808 18.4276L12.3809 18.4276L12.373 16.4276ZM12.3768 16.4276H8.68371V18.4276H12.3768V16.4276Z"
+                              fill="#000000" mask="url(#path-6-inside-3_912_1868)"/>
+                        <path d="M12.377 6.69507H3.84955C3.10256 6.69507 2.49699 7.30063 2.49699 8.04762V16.575C2.49699 17.322 3.10255 17.9276 3.84955 17.9276H12.377C13.124 17.9276 13.7295 17.322 13.7295 16.575V8.04762C13.7295 7.30064 13.124 6.69507 12.377 6.69507Z"
+                              stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5.80132 10.1759H8.05131V15.1759V10.1759H10.3013" stroke="#000000"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <div class="mt-4 flex items-end justify-between">
+                    <div>
+                        <h4 class="text-title-md font-bold text-black dark:text-white">
+                            2.450
+                        </h4>
+                        <span class="text-sm font-medium">Всего команд</span>
+                    </div>
+
+                    <span class="flex items-center gap-1 text-sm font-medium text-meta-3">
+                    2.59%
+                    <svg class="fill-meta-3"
+                         width="10"
+                         height="11"
+                         viewBox="0 0 10 11"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.35716 2.47737L0.908974 5.82987L5.0443e-07 4.94612L5 0.0848689L10 4.94612L9.09103 5.82987L5.64284 2.47737L5.64284 10.0849L4.35716 10.0849L4.35716 2.47737Z"
+                              fill=""/>
+                    </svg>
+                  </span>
+                </div>
+            </div>
+            <!-- Card Item End -->
+
+            <!-- Card Item Start -->
+            <div class="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
+                <div class="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+                    <svg class="fill-primary dark:fill-white"
+                         width="22"
+                         height="22"
+                         viewBox="0 0 14 14"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="m 7.1069816,12.416207 c -0.19364,-0.044 -0.27266,-0.086 -0.3852,-0.2047 -0.15904,-0.1674 -0.18296,-0.2372 -0.18162,-0.5299 10e-4,-0.2991 0.0555,-0.49 0.25034,-0.8836 l 0.11161,-0.2255 0.37729,0 c 0.34472,9e-4 0.39445,-0.01 0.576,-0.066 0.29828,-0.1 0.60331,-0.3115 0.76859,-0.5332998 l 0.0731,-0.098 0.20011,0.2033998 c 0.21319,0.2168 0.40611,0.34 0.68446,0.4371 0.22268,0.078 0.7377204,0.079 1.0217404,0 0.65075,-0.1757 1.1092,-0.6892998 1.27402,-1.4272998 0.019,-0.085 0.11612,-0.8503 0.21575,-1.7002 0.0996,-0.8499 0.18416,-1.5423 0.18783,-1.5386 0.0231,0.023 0.30049,1.0781 0.39238,1.4925 0.44104,1.9891 0.43551,3.3431998 -0.0169,4.1338998 -0.18514,0.3235 -0.54682,0.5819 -0.92632,0.6615 -0.24549,0.052 -0.38104,0.046 -0.59356,-0.023 -0.55333,-0.1806 -1.1985404,-0.1506 -2.3746304,0.1103 -0.91823,0.2038 -1.36422,0.2544 -1.65502,0.188 z m -2.75714,-2.136 c -0.20006,-0.046 -0.42359,-0.1373 -0.57911,-0.2371 l -0.12544,-0.081 0,-2.3411 0,-2.3411 -0.2512,-0.017 c -0.13815,-0.01 -0.25452,-0.014 -0.25858,-0.01 -0.004,0 -0.0156,1.0549 -0.0257,2.3349 l -0.0183,2.3274 -0.0934,0.037 c -0.27258,0.1090998 -0.90829,0.1187998 -1.16907,0.018 -0.40098,-0.1551 -0.67967,-0.5173 -0.79567,-1.034 -0.0266,-0.1186 -0.0334,-0.5804 -0.0334,-2.2603 l 5e-5,-2.1112 0.056,-0.1987 c 0.12599,-0.4473 0.40679,-0.8915 0.70716,-1.1189 0.33103,-0.2505 0.62438,-0.3342 1.17092,-0.3342 l 0.32771,0 0.14825,-0.1512 c 0.0815,-0.083 0.21051,-0.1997 0.28661,-0.2589 0.55366,-0.4305 1.29153,-0.5439 2.01807,-0.3103 l 0.22164,0.071 0.0644,-0.079 c 0.20887,-0.2565 0.48897,-0.4487 0.81139,-0.5568 0.17948,-0.06 0.23474,-0.067 0.57128,-0.068 0.41921,0 0.57163,0.029 0.87409,0.1716 0.22176,0.1047 0.41753,0.2372 0.63453,0.4296 l 0.16735,0.1483 0.19281,-0.036 c 0.25706,-0.049 0.9663804,-0.055 1.1490904,-0.01 0.1965,0.048 0.6064,0.2521 0.7976,0.3973 0.17078,0.1297 0.35933,0.3572 0.45583,0.5501 0.14029,0.2804 0.23687,0.7279 0.23687,1.0974 0,0.1237 -0.11536,1.2009 -0.26182,2.4447 -0.28129,2.3887 -0.28159,2.3905 -0.46324,2.7119 -0.1609,0.2846 -0.43918,0.487 -0.76174,0.5539998 -0.075,0.016 -0.24895,0.024 -0.38661,0.018 -0.2223404,-0.01 -0.2686704,-0.019 -0.4150804,-0.092 -0.21343,-0.106 -0.42327,-0.3154 -0.52602,-0.5249 l -0.0792,-0.1615 0,-2.4093 0,-2.4093 0.078,-0.1648 0.078,-0.1647 -0.18105,-0.1798 c -0.0996,-0.099 -0.19273,-0.1727 -0.207,-0.1638 -0.0521,0.032 -0.19923,0.305 -0.25579,0.4744 l -0.0581,0.1738 -0.0127,2.3969 c -0.0113,2.1186 -0.0174,2.4089 -0.0525,2.5003 -0.11003,0.2857 -0.31599,0.5087 -0.58805,0.6367 -0.1481,0.07 -0.1971,0.08 -0.43306,0.088 -0.43249,0.015 -0.78145,-0.07 -0.96669,-0.2378998 l -0.0961,-0.087 0,-2.4933 0,-2.4934 -0.26069,0 -0.26069,0 -0.006,2.6515 -0.006,2.6514998 -0.18629,0.093 c -0.10246,0.051 -0.25335,0.1104 -0.33532,0.132 -0.20979,0.055 -0.70573,0.069 -0.89752,0.025 z"/>
+                    </svg>
+                </div>
+
+                <div class="mt-4 flex items-end justify-between">
+                    <div>
+                        <h4 class="text-title-md font-bold text-black dark:text-white">
+                            3.456К
+                        </h4>
+                        <span class="text-sm font-medium">Всего боев</span>
+                    </div>
+
+                    <span class="flex items-center gap-1 text-sm font-medium text-meta-5">
+                    0.95%
+                    <svg class="fill-meta-5"
+                         width="10"
+                         height="11"
+                         viewBox="0 0 10 11"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.64284 7.69237L9.09102 4.33987L10 5.22362L5 10.0849L-8.98488e-07 5.22362L0.908973 4.33987L4.35716 7.69237L4.35716 0.0848701L5.64284 0.0848704L5.64284 7.69237Z"
+                              fill=""/>
+                    </svg>
+                  </span>
+                </div>
+            </div>
+            <!-- Card Item End -->
+        </div>
+
+        <div class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+            <!-- ====== Chart One Start -->
+            <div class="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
+                <div class="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
+                    <div class="flex w-full flex-wrap gap-3 sm:gap-5">
+                        <div class="flex min-w-47.5">
+                        <span class="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-primary">
+                          <span class="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
+                        </span>
+                            <div class="w-full">
+                                <p class="font-semibold text-primary">Кол-во участников Кумитэ</p>
+                                <p class="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                            </div>
+                        </div>
+                        <div class="flex min-w-47.5">
+                        <span class="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-secondary">
+                          <span class="block h-2.5 w-full max-w-2.5 rounded-full bg-secondary"></span>
+                        </span>
+                            <div class="w-full">
+                                <p class="font-semibold text-secondary">Кол-во участников Ката</p>
+                                <p class="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full max-w-45 justify-end">
+                        <div class="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
+                            <button class="rounded bg-white py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:bg-boxdark dark:text-white dark:hover:bg-boxdark">
+                                День
+                            </button>
+                            <button class="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
+                                Неделя
+                            </button>
+                            <button class="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
+                                Месяц
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="chartOne" class="-ml-5"></div>
+                </div>
+            </div>
+
+            <!-- ====== Chart One End -->
+
+            <!-- ====== Chart Two Start -->
+            <div class="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
+                <div class="mb-4 justify-between gap-4 sm:flex">
+                    <div>
+                        <h4 class="text-xl font-bold text-black dark:text-white">
+                            Статистика турнира
+                        </h4>
+                    </div>
+                    <div>
+                        <div class="relative z-20 inline-block">
+                            <select name="#"
+                                    id="#"
+                                    class="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none">
+                                <option value="">Команда 1</option>
+                                <option value="">Команда 2</option>
+                            </select>
+                            <span class="absolute top-1/2 right-3 z-10 -translate-y-1/2">
+                            <svg width="10"
+                                 height="6"
+                                 viewBox="0 0 10 6"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.47072 1.08816C0.47072 1.02932 0.500141 0.955772 0.54427 0.911642C0.647241 0.808672 0.809051 0.808672 0.912022 0.896932L4.85431 4.60386C4.92785 4.67741 5.06025 4.67741 5.14851 4.60386L9.09079 0.896932C9.19376 0.793962 9.35557 0.808672 9.45854 0.911642C9.56151 1.01461 9.5468 1.17642 9.44383 1.27939L5.50155 4.98632C5.22206 5.23639 4.78076 5.23639 4.51598 4.98632L0.558981 1.27939C0.50014 1.22055 0.47072 1.16171 0.47072 1.08816Z"
+                                  fill="#637381"/>
+                            <path fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M1.22659 0.546578L5.00141 4.09604L8.76422 0.557869C9.08459 0.244537 9.54201 0.329403 9.79139 0.578788C10.112 0.899434 10.0277 1.36122 9.77668 1.61224L9.76644 1.62248L5.81552 5.33722C5.36257 5.74249 4.6445 5.7544 4.19352 5.32924C4.19327 5.32901 4.19377 5.32948 4.19352 5.32924L0.225953 1.61241C0.102762 1.48922 -4.20186e-08 1.31674 -3.20269e-08 1.08816C-2.40601e-08 0.905899 0.0780105 0.712197 0.211421 0.578787C0.494701 0.295506 0.935574 0.297138 1.21836 0.539529L1.22659 0.546578ZM4.51598 4.98632C4.78076 5.23639 5.22206 5.23639 5.50155 4.98632L9.44383 1.27939C9.5468 1.17642 9.56151 1.01461 9.45854 0.911642C9.35557 0.808672 9.19376 0.793962 9.09079 0.896932L5.14851 4.60386C5.06025 4.67741 4.92785 4.67741 4.85431 4.60386L0.912022 0.896932C0.809051 0.808672 0.647241 0.808672 0.54427 0.911642C0.500141 0.955772 0.47072 1.02932 0.47072 1.08816C0.47072 1.16171 0.50014 1.22055 0.558981 1.27939L4.51598 4.98632Z"
+                                  fill="#637381"/>
+                            </svg>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="chartTwo" class="-ml-5 -mb-9"></div>
+                </div>
+            </div>
+
+            <!-- ====== Chart Two End -->
+
+            <!-- ====== Chart Three Start -->
+            <div class="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
+                <div class="mb-3 justify-between gap-4 sm:flex">
+                    <div>
+                        <h4 class="text-xl font-bold text-black dark:text-white">
+                            Участники от клубов
+                        </h4>
+                    </div>
+                    <div>
+                        <div class="relative z-20 inline-block">
+                            <select name=""
+                                    id=""
+                                    class="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none">
+                                <option value="">Турнир 1</option>
+                                <option value="">Турнир 2</option>
+                            </select>
+                            <span class="absolute top-1/2 right-3 z-10 -translate-y-1/2">
+                          <svg width="10"
+                               height="6"
+                               viewBox="0 0 10 6"
+                               fill="none"
+                               xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.47072 1.08816C0.47072 1.02932 0.500141 0.955772 0.54427 0.911642C0.647241 0.808672 0.809051 0.808672 0.912022 0.896932L4.85431 4.60386C4.92785 4.67741 5.06025 4.67741 5.14851 4.60386L9.09079 0.896932C9.19376 0.793962 9.35557 0.808672 9.45854 0.911642C9.56151 1.01461 9.5468 1.17642 9.44383 1.27939L5.50155 4.98632C5.22206 5.23639 4.78076 5.23639 4.51598 4.98632L0.558981 1.27939C0.50014 1.22055 0.47072 1.16171 0.47072 1.08816Z"
+                                  fill="#637381"/>
+                            <path fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M1.22659 0.546578L5.00141 4.09604L8.76422 0.557869C9.08459 0.244537 9.54201 0.329403 9.79139 0.578788C10.112 0.899434 10.0277 1.36122 9.77668 1.61224L9.76644 1.62248L5.81552 5.33722C5.36257 5.74249 4.6445 5.7544 4.19352 5.32924C4.19327 5.32901 4.19377 5.32948 4.19352 5.32924L0.225953 1.61241C0.102762 1.48922 -4.20186e-08 1.31674 -3.20269e-08 1.08816C-2.40601e-08 0.905899 0.0780105 0.712197 0.211421 0.578787C0.494701 0.295506 0.935574 0.297138 1.21836 0.539529L1.22659 0.546578ZM4.51598 4.98632C4.78076 5.23639 5.22206 5.23639 5.50155 4.98632L9.44383 1.27939C9.5468 1.17642 9.56151 1.01461 9.45854 0.911642C9.35557 0.808672 9.19376 0.793962 9.09079 0.896932L5.14851 4.60386C5.06025 4.67741 4.92785 4.67741 4.85431 4.60386L0.912022 0.896932C0.809051 0.808672 0.647241 0.808672 0.54427 0.911642C0.500141 0.955772 0.47072 1.02932 0.47072 1.08816C0.47072 1.16171 0.50014 1.22055 0.558981 1.27939L4.51598 4.98632Z"
+                                  fill="#637381"/>
+                          </svg>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div id="chartThree" class="mx-auto flex justify-center"></div>
+                </div>
+                <div class="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
+                    <div class="w-full px-8 sm:w-1/2">
+                        <div class="flex w-full items-center">
+                            <span class="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
+                            <p class="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+                                <span> Крепость </span>
+                                <span> 65% </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-full px-8 sm:w-1/2">
+                        <div class="flex w-full items-center">
+                            <span class="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
+                            <p class="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+                                <span> СДЮШОР по ВЕ </span>
+                                <span> 34% </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-full px-8 sm:w-1/2">
+                        <div class="flex w-full items-center">
+                            <span class="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]"></span>
+                            <p class="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+                                <span> Сингитай </span>
+                                <span> 45% </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-full px-8 sm:w-1/2">
+                        <div class="flex w-full items-center">
+                            <span class="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
+                            <p class="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+                                <span> Другие </span>
+                                <span> 12% </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== Chart Three End -->
+
+            <!-- ====== Map One Start -->
+            <div class="col-span-12 rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-7">
+                <h4 class="mb-2 text-xl font-bold text-black dark:text-white">
+                    Пример карты регионов
+                </h4>
+                <div id="mapOne" class="mapOne map-btn h-90"></div>
+            </div>
+
+            <!-- ====== Map One End -->
+
+            <!-- ====== Table One Start -->
+            <div class="col-span-12 xl:col-span-8">
+                <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+                    <h4 class="mb-6 text-xl font-bold text-black dark:text-white">
+                        Топ команд
+                    </h4>
+
+                    <div class="flex flex-col">
+                        <div class="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+                            <div class="p-2.5 xl:p-5">
+                                <h5 class="text-sm font-medium uppercase xsm:text-base">Клуб</h5>
+                            </div>
+                            <div class="p-2.5 text-center xl:p-5">
+                                <h5 class="text-sm font-medium uppercase xsm:text-base">Кол-во участий</h5>
+                            </div>
+                            <div class="p-2.5 text-center xl:p-5">
+                                <h5 class="text-sm font-medium uppercase xsm:text-base">Кол-во труниров</h5>
+                            </div>
+                            <div class="hidden p-2.5 text-center sm:block xl:p-5">
+                                <h5 class="text-sm font-medium uppercase xsm:text-base">Кол-во призовых мест</h5>
+                            </div>
+                            <div class="hidden p-2.5 text-center sm:block xl:p-5">
+                                <h5 class="text-sm font-medium uppercase xsm:text-base">Коэффициент побед</h5>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5">
+                            <div class="flex items-center gap-3 p-2.5 xl:p-5">
+                                <div class="flex-shrink-0">
+                                    <img th:src="@{/images/teams/default-logo.jpg}" alt="Команда"
+                                         class="rounded-full w-48 h-48" style="max-width: 48px"/>
+                                </div>
+                                <p class="hidden font-medium text-black dark:text-white sm:block">
+                                    Крепость
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-black dark:text-white">3500</p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-meta-3">280</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-black dark:text-white">596</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-meta-5">5.87%</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5">
+                            <div class="flex items-center gap-3 p-2.5 xl:p-5">
+                                <div class="flex-shrink-0">
+                                    <img th:src="@{/images/teams/sdushor-logo.jpg}" alt="Команда"
+                                         class="rounded-full w-48 h-48" style="max-width: 48px"/>
+                                </div>
+                                <p class="hidden font-medium text-black dark:text-white sm:block">
+                                    СДЮШОР по ВЕ
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-black dark:text-white">2200</p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-meta-3">236</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-black dark:text-white">467</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-meta-5">4.42%</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5">
+                            <div class="flex items-center gap-3 p-2.5 xl:p-5">
+                                <div class="flex-shrink-0">
+                                    <img th:src="@{/images/teams/default-logo.jpg}" alt="Команда"
+                                         class="rounded-full w-48 h-48" style="max-width: 48px"/>
+                                </div>
+                                <p class="hidden font-medium text-black dark:text-white sm:block">
+                                    Сингитай
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-black dark:text-white">2100</p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-meta-3">211</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-black dark:text-white">420</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-meta-5">3.7%</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5">
+                            <div class="flex items-center gap-3 p-2.5 xl:p-5">
+                                <div class="flex-shrink-0">
+                                    <img th:src="@{/images/teams/densetsu-logo.jpg}" alt="Команда"
+                                         class="rounded-full w-48 h-48" style="max-width: 48px"/>
+                                </div>
+                                <p class="hidden font-medium text-black dark:text-white sm:block">
+                                    Densetsu
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-black dark:text-white">1500</p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-meta-3">190</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-black dark:text-white">389</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-meta-5">2.5%</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 sm:grid-cols-5">
+                            <div class="flex items-center gap-3 p-2.5 xl:p-5">
+                                <div class="flex-shrink-0">
+                                    <img th:src="@{/images/teams/default-logo.jpg}" alt="Команда"
+                                         class="rounded-full w-48 h-48" style="max-width: 48px"/>
+                                </div>
+                                <p class="hidden font-medium text-black dark:text-white sm:block">
+                                    ФСК СПб
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-black dark:text-white">1200</p>
+                            </div>
+
+                            <div class="flex items-center justify-center p-2.5 xl:p-5">
+                                <p class="font-medium text-meta-3">140</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-black dark:text-white">230</p>
+                            </div>
+
+                            <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+                                <p class="font-medium text-meta-5">1.9%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- ====== Table One End -->
+
+            <!-- ====== Chat Card Start -->
+            <!--            <div class="col-span-12 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">-->
+            <!--                <h4 class="mb-6 px-7.5 text-xl font-bold text-black dark:text-white">-->
+            <!--                    Chats-->
+            <!--                </h4>-->
+
+            <!--                <div>-->
+            <!--                    <a href="messages.html"-->
+            <!--                       class="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4">-->
+            <!--                        <div class="relative h-14 w-14 rounded-full">-->
+            <!--                            <img src="/static/images/user/user-03.png" alt="User"/>-->
+            <!--                            <span class="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="flex flex-1 items-center justify-between">-->
+            <!--                            <div>-->
+            <!--                                <h5 class="font-medium text-black dark:text-white">-->
+            <!--                                    Devid Heilo-->
+            <!--                                </h5>-->
+            <!--                                <p>-->
+            <!--                                    <span class="text-sm font-medium text-black dark:text-white">Hello, how are you?</span>-->
+            <!--                                    <span class="text-xs"> . 12 min</span>-->
+            <!--                                </p>-->
+            <!--                            </div>-->
+            <!--                            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary">-->
+            <!--                                <span class="text-sm font-medium text-white">3</span>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </a>-->
+            <!--                    <a href="messages.html"-->
+            <!--                       class="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4">-->
+            <!--                        <div class="relative h-14 w-14 rounded-full">-->
+            <!--                            <img src="/static/images/user/user-04.png" alt="User"/>-->
+            <!--                            <span class="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="flex flex-1 items-center justify-between">-->
+            <!--                            <div>-->
+            <!--                                <h5 class="font-medium">Henry Fisher</h5>-->
+            <!--                                <p>-->
+            <!--                                    <span class="text-sm font-medium">I am waiting for you</span>-->
+            <!--                                    <span class="text-xs"> . 5:54 PM</span>-->
+            <!--                                </p>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </a>-->
+            <!--                    <a href="messages.html"-->
+            <!--                       class="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4">-->
+            <!--                        <div class="relative h-14 w-14 rounded-full">-->
+            <!--                            <img src="/static/images/user/user-05.png" alt="User"/>-->
+            <!--                            <span class="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"></span>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="flex flex-1 items-center justify-between">-->
+            <!--                            <div>-->
+            <!--                                <h5 class="font-medium">Wilium Smith</h5>-->
+            <!--                                <p>-->
+            <!--                                    <span class="text-sm font-medium">Where are you now?</span>-->
+            <!--                                    <span class="text-xs"> . 10:12 PM</span>-->
+            <!--                                </p>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </a>-->
+            <!--                    <a href="messages.html"-->
+            <!--                       class="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4">-->
+            <!--                        <div class="relative h-14 w-14 rounded-full">-->
+            <!--                            <img src="/static/images/user/user-01.png" alt="User"/>-->
+            <!--                            <span class="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-3"></span>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="flex flex-1 items-center justify-between">-->
+            <!--                            <div>-->
+            <!--                                <h5 class="font-medium text-black dark:text-white">-->
+            <!--                                    Henry Deco-->
+            <!--                                </h5>-->
+            <!--                                <p>-->
+            <!--                                    <span class="text-sm font-medium text-black dark:text-white">Thank you so much!</span>-->
+            <!--                                    <span class="text-xs"> . Sun</span>-->
+            <!--                                </p>-->
+            <!--                            </div>-->
+            <!--                            <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary">-->
+            <!--                                <span class="text-sm font-medium text-white">2</span>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </a>-->
+            <!--                    <a href="messages.html"-->
+            <!--                       class="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4">-->
+            <!--                        <div class="relative h-14 w-14 rounded-full">-->
+            <!--                            <img src="/static/images/user/user-02.png" alt="User"/>-->
+            <!--                            <span class="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-7"></span>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="flex flex-1 items-center justify-between">-->
+            <!--                            <div>-->
+            <!--                                <h5 class="font-medium">Jubin Jack</h5>-->
+            <!--                                <p>-->
+            <!--                                    <span class="text-sm font-medium">I really love that!</span>-->
+            <!--                                    <span class="text-xs"> . Oct 23</span>-->
+            <!--                                </p>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </a>-->
+            <!--                    <a href="messages.html"-->
+            <!--                       class="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4">-->
+            <!--                        <div class="relative h-14 w-14 rounded-full">-->
+            <!--                            <img src="/static/images/user/user-05.png" alt="User"/>-->
+            <!--                            <span class="absolute right-0 bottom-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-meta-6"></span>-->
+            <!--                        </div>-->
+
+            <!--                        <div class="flex flex-1 items-center justify-between">-->
+            <!--                            <div>-->
+            <!--                                <h5 class="font-medium">Wilium Smith</h5>-->
+            <!--                                <p>-->
+            <!--                                    <span class="text-sm font-medium">Where are you now?</span>-->
+            <!--                                    <span class="text-xs"> . Sep 20</span>-->
+            <!--                                </p>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </a>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!-- ====== Chat Card End -->
+        </div>
+    </div>
+</main>
+</body>
+</html>

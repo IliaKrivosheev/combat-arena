@@ -10,75 +10,81 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FrontPageController extends BaseController {
 
-    @GetMapping(value = "/")
+    @GetMapping(value = {"/", "/index"})
     public String indexPage(Model model) {
         log.debug("opening front indexPage...");
-        return "front/index";
+        return "pages/index";
     }
 
     @GetMapping(value = "/alerts")
     public String alertsPage(Model model) {
         log.debug("opening front alertsPage...");
-        return "front/alerts";
+        return "pages/alerts";
     }
 
     @GetMapping(value = "/buttons")
     public String buttonsPage(Model model) {
         log.debug("opening front buttonsPage...");
-        return "front/buttons";
+        return "pages/buttons";
     }
 
     @GetMapping(value = "/calendar")
     public String calendarPage(Model model) {
         log.debug("opening front calendarPage...");
-        return "front/calendar";
+        return "pages/calendar";
     }
 
     @GetMapping(value = "/chart")
     public String chartPage(Model model) {
         log.debug("opening front chartPage...");
-        return "front/chart";
+        return "pages/chart";
     }
 
     @GetMapping(value = "/form-elements")
     public String formElementsPage(Model model) {
         log.debug("opening front formElementsPage...");
-        return "front/form-elements";
+        return "pages/form-elements";
     }
 
-    @GetMapping(value = "/form-layout")
+    @GetMapping(value = "/form-layoutl")
     public String formLayoutPage(Model model) {
         log.debug("opening front formLayoutPage...");
-        return "front/form-layout";
+        return "pages/form-layout";
     }
 
     @GetMapping(value = "/profile")
     public String profilePage(Model model) {
         log.debug("opening front profilePage...");
-        return "front/profile";
+        return "pages/profile";
     }
 
     @GetMapping(value = "/settings")
     public String settingsPage(Model model) {
         log.debug("opening front settingsPage...");
-        return "front/settings";
+        return "pages/settings";
     }
 
     @GetMapping(value = "/signin")
     public String signinPage(Model model) {
         log.debug("opening front signinPage...");
-        return "front/signin";
+        return "pages/signin";
     }
 
     @GetMapping(value = "/signup")
     public String signupPage(Model model) {
         log.debug("opening front signupPage...");
-        return "front/signup";
+        return "pages/signup";
     }
 
     @GetMapping(value = "/tables")
     public String tablesPage(Model model) {
         log.debug("opening front tablesPage...");
-        return "front/tables";
+        return "pages/tables";
+    }
+
+    @GetMapping(value = "/admin-layout")
+    public String adminLayoutPage(Model model) {
+        log.debug("opening front adminLayoutPage...");
+        return "layouts/admin-layout";
     }
 }
