@@ -46,7 +46,7 @@ public class FrontPageController extends BaseController {
         return "pages/form-elements";
     }
 
-    @GetMapping(value = "/form-layoutl")
+    @GetMapping(value = "/form-layout")
     public String formLayoutPage(Model model) {
         log.debug("opening front formLayoutPage...");
         return "pages/form-layout";
