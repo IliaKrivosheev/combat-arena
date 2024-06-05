@@ -10,3 +10,7 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  thymeleaf:
+    cache: false
+    enable-spring-el-compiler: true
+    enabled: true

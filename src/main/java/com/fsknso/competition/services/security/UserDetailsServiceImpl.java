@@ -1,4 +1,4 @@
-package com.fsknso.competition.services;
+package com.fsknso.competition.services.security;
 
 import com.fsknso.competition.core.User;
 import com.fsknso.competition.core.UserDetailsImpl;

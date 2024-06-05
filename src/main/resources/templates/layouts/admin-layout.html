@@ -26,25 +26,25 @@
          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
       :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
 <!-- ===== Preloader Start ===== -->
-<div th:replace="layouts/fragments/preloader"></div>
+<div th:replace="~{layouts/fragments/preloader}"></div>
 
 <!-- ===== Preloader End ===== -->
 
 <!-- ===== Page Wrapper Start ===== -->
 <div class="flex h-screen overflow-hidden">
     <!-- ===== Sidebar Start ===== -->
-    <div th:replace="layouts/fragments/left-menu"></div>
+    <div th:replace="~{layouts/fragments/left-menu}"></div>
     <!-- ===== Sidebar End ===== -->
 
     <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
         <!-- ===== Content Area Start ===== -->
-        <div th:replace="layouts/fragments/admin-front-header"></div>
+        <div th:replace="~{layouts/fragments/admin-front-header}"></div>
 
         <main layout:fragment="content">Insert content page here...</main>
     </div>
 </div>
 <!-- ===== Page Wrapper End ===== -->
-<script defer src="/static/js/bundle.js"></script>
+<script th:src="@{/js/bundle.js}" type="text/javascript"></script>
 </body>
 
 </html>
