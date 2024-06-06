@@ -15,12 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+    private static final String HOME_PAGE = "/index";
     private final UserRepository userRepository;
 
     @Autowired
@@ -36,7 +36,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/", "/api/new-user", "/index").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/", "/api/new-user", HOME_PAGE).permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
@@ -44,9 +44,11 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/signin")
-                        .failureUrl("/login-error"))
+                        .failureUrl("/login-error")
+                        .defaultSuccessUrl(HOME_PAGE, true)
+                        .permitAll())
                 .logout(form -> form
-                        .logoutSuccessUrl("/"))
+                        .logoutSuccessUrl(HOME_PAGE))
                 .build();
     }
 
