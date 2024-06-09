@@ -70,25 +70,6 @@ public class FrontPageController extends BaseController {
         return "pages/settings";
     }
 
-    @GetMapping(value = "/signin")
-    public String signinPage(Model model) {
-        log.debug("opening front signinPage...");
-        return "pages/signin";
-    }
-
-    @GetMapping("/login-error")
-    public String loginError(Model model) {
-        log.debug("opening front signinPage...");
-        model.addAttribute("loginError", true);
-        return "pages/signin";
-    }
-
-    @GetMapping(value = "/signup")
-    public String signupPage(Model model) {
-        log.debug("opening front signupPage...");
-        return "pages/signup";
-    }
-
     @GetMapping(value = "/tables")
     public String tablesPage(Model model) {
         log.debug("opening front tablesPage...");

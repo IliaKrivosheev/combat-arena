@@ -41,10 +41,11 @@ public class SecurityConfig {
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/signup").anonymous()
+                        .requestMatchers("/admin/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
-                        .loginPage("/signin")
-                        .failureUrl("/login-error")
+                        .loginPage("/admin/signin")
+                        .failureUrl("/admin/login-error")
                         .defaultSuccessUrl(HOME_PAGE, true)
                         .permitAll())
                 .logout(form -> form

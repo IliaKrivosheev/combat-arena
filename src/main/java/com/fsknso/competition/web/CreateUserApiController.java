@@ -41,8 +41,6 @@ public class CreateUserApiController {
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setEmail(email);
         newUser.setRoles(userRoles);
-        newUser.setCreatedBy("anonymous");
-        newUser.setLastModifiedBy("anonymous");
         newUser = repository.save(newUser);
         System.out.println(newUser);
         return "User is saved";
