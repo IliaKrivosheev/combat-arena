@@ -1,83 +1,76 @@
 package com.fsknso.competition.web;
 
-import com.fsknso.competition.core.User;
-import com.fsknso.competition.core.repository.UserRepository;
 import com.fsknso.competition.web.common.BaseController;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @Controller
 public class FrontPageController extends BaseController {
 
     @GetMapping(value = {"/", "/index"})
-    public String indexPage(Model model) {
+    public String indexPage() {
         log.debug("opening front indexPage...");
-        return "pages/index";
+        return "index";
     }
 
     @GetMapping(value = "/alerts")
-    public String alertsPage(Model model) {
+    public String alertsPage() {
         log.debug("opening front alertsPage...");
-        return "pages/alerts";
+        return "alerts";
     }
 
     @GetMapping(value = "/buttons")
-    public String buttonsPage(Model model) {
+    public String buttonsPage() {
         log.debug("opening front buttonsPage...");
-        return "pages/buttons";
+        return "buttons";
     }
 
     @GetMapping(value = "/calendar")
-    public String calendarPage(Model model) {
+    public String calendarPage() {
         log.debug("opening front calendarPage...");
-        return "pages/calendar";
+        return "calendar";
     }
 
     @GetMapping(value = "/chart")
-    public String chartPage(Model model) {
+    public String chartPage() {
         log.debug("opening front chartPage...");
-        return "pages/chart";
+        return "chart";
     }
 
     @GetMapping(value = "/form-elements")
-    public String formElementsPage(Model model) {
+    public String formElementsPage() {
         log.debug("opening front formElementsPage...");
-        return "pages/form-elements";
+        return "form-elements";
     }
 
     @GetMapping(value = "/form-layout")
-    public String formLayoutPage(Model model) {
+    public String formLayoutPage() {
         log.debug("opening front formLayoutPage...");
-        return "pages/form-layout";
+        return "form-layout";
     }
 
     @GetMapping(value = "/profile")
-    public String profilePage(Model model) {
+    public String profilePage() {
         log.debug("opening front profilePage...");
-        return "pages/profile";
+        return "profile";
     }
 
     @GetMapping(value = "/settings")
-    public String settingsPage(Model model) {
+    public String settingsPage() {
         log.debug("opening front settingsPage...");
-        return "pages/settings";
+        return "settings";
     }
 
     @GetMapping(value = "/tables")
-    public String tablesPage(Model model) {
+    public String tablesPage() {
         log.debug("opening front tablesPage...");
-        return "pages/tables";
+        return "tables";
     }
 
     @GetMapping(value = "/admin-layout")
-    public String adminLayoutPage(Model model) {
+    public String adminLayoutPage() {
         log.debug("opening front adminLayoutPage...");
         return "layouts/admin-layout";
     }

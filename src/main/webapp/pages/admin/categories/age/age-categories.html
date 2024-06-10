@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Весовые категории | Combat Arena</title>
-    <link rel="icon" th:href="@{/images/favicon.ico}">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link rel="icon" th:href="@{/resources/images/favicon.ico}">
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet">
 </head>
 
 <body x-data="{ page: 'alerts', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -41,23 +41,23 @@
                         Редактирование весовой категории
                     </h3>
                 </div>
-                <form action="#" th:action="@{/admin/categories/edit-weight-category(uuid=${category.uuid})}"
+                <form action="#" th:action="@{/admin/categories/edit-age-category(uuid=${category.uuid})}"
                       method="post"
                       class="flex flex-col gap-5.5 p-6.5">
                     <div>
                         <label class="mb-3 block text-sm font-medium text-black dark:text-white">
-                            Вес от
+                            Возраст от
                         </label>
-                        <input type="number" id="fromWeight" name="fromWeight"
-                               placeholder="Вес от" th:value="${category.fromWeight}"
+                        <input type="number" id="fromAge" name="fromAge"
+                               placeholder="Возраст от" th:value="${category.fromAge}"
                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
                     </div>
                     <div>
                         <label class="mb-3 block text-sm font-medium text-black dark:text-white">
-                            Вес до
+                            Возраст до
                         </label>
-                        <input type="number" id="toWeight" name="toWeight"
-                               placeholder="Вес до" th:value="${category.toWeight}"
+                        <input type="number" id="toAge" name="toAge"
+                               placeholder="Возраст до" th:value="${category.toAge}"
                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
                     </div>
                     <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
@@ -65,7 +65,7 @@
                                 class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Обновить
                         </button>
-                        <a th:href="@{/admin/categories/weight-categories}"
+                        <a th:href="@{/admin/categories/age-categories}"
                            class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-meta-4 py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Назад
                         </a>

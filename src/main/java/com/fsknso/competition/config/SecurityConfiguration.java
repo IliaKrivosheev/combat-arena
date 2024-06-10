@@ -19,12 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig {
+public class SecurityConfiguration {
     private static final String HOME_PAGE = "/index";
     private final UserRepository userRepository;
 
     @Autowired
-    public SecurityConfig(UserRepository userRepository) {
+    public SecurityConfiguration(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -37,9 +37,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/", "/api/new-user", HOME_PAGE).permitAll()
-                        .requestMatchers("/css/**").permitAll()
-                        .requestMatchers("/js/**").permitAll()
-                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/resources/css/**").permitAll()
+                        .requestMatchers("/resources/js/**").permitAll()
+                        .requestMatchers("/resources/images/**").permitAll()
                         .requestMatchers("/signup").anonymous()
                         .requestMatchers("/admin/**").permitAll()
                         .anyRequest().authenticated())

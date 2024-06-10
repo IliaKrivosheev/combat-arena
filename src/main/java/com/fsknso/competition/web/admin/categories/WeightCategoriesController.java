@@ -14,7 +14,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/categories")
 public class WeightCategoriesController extends BaseController {
-    private static final String FOLDER_PATH = "admin/categories/";
+    private static final String FOLDER_PATH = "admin/categories/weight/";
+    private static final String WEIGHT_CATEGORIES_ATTR = "weightCategories";
 
     private final WeightCategoryRepository weightCategoryRepository;
 
@@ -26,7 +27,7 @@ public class WeightCategoriesController extends BaseController {
     public String showWeightCategoriesPage(Model model) {
         log.info("Opening Weight Categories Page...");
         List<WeightCategory> weightCategories = weightCategoryRepository.findAll();
-        model.addAttribute("weightCategories", weightCategories);
+        model.addAttribute(WEIGHT_CATEGORIES_ATTR, weightCategories);
         return FOLDER_PATH + "weight-categories";
     }
 
@@ -62,7 +63,7 @@ public class WeightCategoriesController extends BaseController {
         category.setMaxCategory(weightCategory.getMaxCategory());
         weightCategoryRepository.save(category);
         List<WeightCategory> weightCategories = weightCategoryRepository.findAll();
-        model.addAttribute("weightCategories", weightCategories);
+        model.addAttribute(WEIGHT_CATEGORIES_ATTR, weightCategories);
         return "redirect:/admin/categories/weight-categories";
     }
 
@@ -84,7 +85,7 @@ public class WeightCategoriesController extends BaseController {
         }
         weightCategoryRepository.save(weightCategory);
         List<WeightCategory> weightCategories = weightCategoryRepository.findAll();
-        model.addAttribute("weightCategories", weightCategories);
+        model.addAttribute(WEIGHT_CATEGORIES_ATTR, weightCategories);
         return "redirect:/admin/categories/weight-categories";
     }
     @PostMapping("/delete-weight-category")
@@ -97,7 +98,7 @@ public class WeightCategoriesController extends BaseController {
         weightCategoryRepository.delete(category);
 
         List<WeightCategory> weightCategories = weightCategoryRepository.findAll();
-        model.addAttribute("weightCategories", weightCategories);
+        model.addAttribute(WEIGHT_CATEGORIES_ATTR, weightCategories);
         return FOLDER_PATH + "weight-categories";
     }
 }

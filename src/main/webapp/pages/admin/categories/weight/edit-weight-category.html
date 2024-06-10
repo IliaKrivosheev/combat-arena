@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/admin-layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Весовые категории | Combat Arena</title>
+    <link rel="icon" th:href="@{/resources/images/favicon.ico}">
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet">
+</head>
+
+<body x-data="{ page: 'alerts', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+      x-init="
+          darkMode = JSON.parse(localStorage.getItem('darkMode'));
+          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+      :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+
+<main layout:fragment="content">
+    <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+        <!-- Breadcrumb Start -->
+        <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h2 class="text-title-md2 font-bold text-black dark:text-white">
+                Весовые категории
+            </h2>
+
+            <nav>
+                <ol class="flex items-center gap-2">
+                    <li>
+                        <a class="font-medium" th:href="@{/admin/categories/administration}">Категории /</a>
+                    </li>
+                    <li class="font-medium text-primary">Весовые категории</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Breadcrumb End -->
+        <div class="flex flex-col gap-10">
+            <div class="max-w-900px mx-auto w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                    <h3 class="font-medium text-black dark:text-white" style="text-align: center">
+                        Редактирование весовой категории
+                    </h3>
+                </div>
+                <form action="#" th:action="@{/admin/categories/edit-weight-category(uuid=${category.uuid})}"
+                      method="post"
+                      class="flex flex-col gap-5.5 p-6.5">
+                    <div>
+                        <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                            Вес от
+                        </label>
+                        <input type="number" id="fromWeight" name="fromWeight"
+                               placeholder="Вес от" th:value="${category.fromWeight}"
+                               class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
+                    </div>
+                    <div>
+                        <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                            Вес до
+                        </label>
+                        <input type="number" id="toWeight" name="toWeight"
+                               placeholder="Вес до" th:value="${category.toWeight}"
+                               class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                        <button type="submit"
+                                class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                            Обновить
+                        </button>
+                        <a th:href="@{/admin/categories/weight-categories}"
+                           class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-meta-4 py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                            Назад
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>
