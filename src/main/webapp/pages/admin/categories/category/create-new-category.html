@@ -8,6 +8,9 @@
     <title>Администрирование | Combat Arena</title>
     <link rel="icon" th:href="@{/resources/images/favicon.ico}">
     <link th:href="@{/resources/css/style.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
 </head>
 
 <body x-data="{ page: 'alerts', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -51,9 +54,12 @@
                                 Возрастная категория
                             </label>
                             <div class="relative z-20 bg-white dark:bg-form-input">
-                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="age" name="age"
+                                <select onclick="handleSelectChange(event, this)"
+                                        size="22" id="age" name="age"
                                         class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                                     <option th:each="ageCategoty : ${ageCategories}" th:value="${ageCategoty.uuid}"
+                                            th:id="${ageCategoty.uuid}"
+                                            th:attr="age-to-age=${ageCategoty.toAge},age-from-age=${ageCategoty.fromAge},age-name=${ageCategoty.name}"
                                             th:text="${ageCategoty.name + ' : ' + ageCategoty.getFromAge().toString() + '-' + ageCategoty.getToAge().toString()}">
                                 </select>
                             </div>
@@ -64,29 +70,41 @@
                                 Пол
                             </label>
                             <div class="relative z-20 bg-white dark:bg-form-input">
-                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="gender" name="gender"
+                                <select onclick="handleSelectChange(event, this)"
+                                        size="22" id="gender" name="gender"
                                         class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                                     <option th:each="gender : ${genders}" th:value="${gender}"
+                                            th:id="${gender}"
+                                            th:attr="gender=${gender},gender-label=${gender.label}"
                                             th:text="${gender.getLabel()}">
                                 </select>
                             </div>
                         </div>
                         <div>
-                            <label for="grade"
+                            <label for="categoryType"
                                    class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
                                 Тип категории
                             </label>
                             <div class="relative z-20 bg-white dark:bg-form-input">
-                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="21" id="categoryType"
+                                <select onclick="handleSelectChange(event, this)"
+                                        size="21" id="categoryType"
                                         name="categoryType"
                                         class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                                     <optgroup label="Индивидуальный" style="font-weight: bold">
-                                        <option value="kumite">Кумитэ</option>
-                                        <option value="kata">Ката</option>
+                                        <option th:id="${'kumite'}" value="kumite"
+                                                th:attr="team=${false},type=${'kumite'}">Кумитэ
+                                        </option>
+                                        <option th:id="${'kata'}" value="kata" th:attr="team=${false},type=${'kata'}">
+                                            Ката
+                                        </option>
                                     </optgroup>
                                     <optgroup label="Командный" style="font-weight: bold">
-                                        <option value="kumite-team">Кумитэ Команда</option>
-                                        <option value="kata-team">Ката Команда</option>
+                                        <option th:id="${'kumite-team'}" value="kumite-team"
+                                                th:attr="team=${true},type=${'kumite'}">Кумитэ Команда
+                                        </option>
+                                        <option th:id="${'kata-team'}" value="kata-team"
+                                                th:attr="team=${true},type=${'kata'}">Ката Команда
+                                        </option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -97,11 +115,14 @@
                                 Весовая категория
                             </label>
                             <div class="relative z-20 bg-white dark:bg-form-input">
-                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="weight" name="weight"
+                                <select onclick="handleSelectChange(event, this)"
+                                        size="22" id="weight" name="weight"
                                         class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                                     <option th:each="weightCategory : ${weightCategories}"
                                             th:value="${weightCategory.uuid}"
-                                            th:text="${'весовая категория ' + (weightCategory.maxCategory ? '' + weightCategory.fromWeight.intValue() + '+ кг' : weightCategory.toWeight.intValue() + ' кг')}">
+                                            th:id="${weightCategory.uuid}"
+                                            th:attr="weight-from-weight=${weightCategory.fromWeight.intValue()},weight-to-weight=${weightCategory.toWeight.intValue()},weight-max-category=${weightCategory.maxCategory},weight-min-category=${weightCategory.minCategory}"
+                                            th:text="${'весовая категория ' + (weightCategory.maxCategory && weightCategory.minCategory ? 'Абсолюная' : (weightCategory.maxCategory ? '' + weightCategory.fromWeight.intValue() + '+ кг' : weightCategory.toWeight.intValue() + ' кг'))}">
                                     </option>
                                 </select>
                             </div>
@@ -112,17 +133,92 @@
                                 Пояс
                             </label>
                             <div class="relative z-20 bg-white dark:bg-form-input">
-                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="grade" name="grade"
+                                <select onclick="handleSelectChange(event, this)"
+                                        size="22" id="grade" name="grade"
                                         class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
                                     <option th:each="grade : ${grades}" th:value="${grade}"
+                                            th:id="${grade}"
+                                            th:attr="grade=${grade},grade-label=${grade.label}"
                                             th:text="${grade.getLabel()}">
                                 </select>
                             </div>
                         </div>
                     </div>
+
+                    <div id="newCategoryBlock" style="display: none;">
+                        <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+                            <h3 class="font-medium text-black dark:text-white" style="text-align: center">
+                                <b>Новая категории</b>
+                            </h3>
+                        </div>
+                        <div class="mb-2">
+                            <label for="name" class="mb-2 mt-2 block text-sm font-medium text-black dark:text-white">
+                                <b>Отображаемое имя</b>
+                            </label>
+                            <input type="text" id="name" name="name" onkeyup="updateNameTemplate()"
+                                   placeholder="{categoryAgeName} {age} {weight}"
+                                   class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
+                        </div>
+                        <div class="mb-3 block text-black dark:text-white m-auto-ml-1.5 mt-2" style="font-size: 12px">
+                            <p>
+                                Отображаемое имя категории может быть записано в виде обычного текста для каждой вновь
+                                созданной категории или с помощью указанных ниже <strong>Параметров</strong>.
+                            </p>
+                            <p class="mt-2">
+                                Параметры, которые могут быть использованы для построения названия:
+                            </p>
+                            <ul class="mt-2 ml-4" style="font-size: 12px; list-style-position: inside;">
+                                <li>&#9679;&#9;<strong>{ageGroup}</strong>: `взрослые`, `до 18`, `до 16`, `до 12`</li>
+                                <li>&#9679;&#9;<strong>{seniors}</strong>: `да`, если `возраст от` больше или равен 35,
+                                    иначе
+                                    `нет`
+                                </li>
+                                <li>&#9679;&#9;<strong>{adults}</strong>: `да`, если `возраст от` больше или равен 18,
+                                    иначе
+                                    `нет`
+                                </li>
+                                <li>&#9679;&#9;<strong>{juniors}</strong>: `да`, если `возраст до` равен 18, иначе `нет`
+                                </li>
+                                <li>&#9679;&#9;<strong>{team}</strong>: `да`, если категория предназначена для команды,
+                                    иначе `нет`
+                                </li>
+                                <li>&#9679;&#9;<strong>{type}</strong>: `ката`, `кумитэ`</li>
+                                <li>&#9679;&#9;<strong>{sex}</strong>: `Женский`, `Мужской`, `Смешанный`</li>
+                                <li>&#9679;&#9;<strong>{age}</strong>: Генерируемое именование в зависимости от `пола` и
+                                    установки `возрастной категории`
+                                </li>
+                                <li>&#9679;&#9;<strong>{categoryAgeName}</strong>: Значение настройки возрастной
+                                    категории `Название`
+                                </li>
+                                <li>&#9679;&#9;<strong>{ageFrom}</strong>: Значение установки возрастной категории
+                                    `Возраст от`
+                                </li>
+                                <li>&#9679;&#9;<strong>{ageTo}</strong>: Значение установки возрастной категории
+                                    `Возраст до`
+                                </li>
+                                <li>&#9679;&#9;<strong>{weight}</strong>: Генерируемый предварительный просмотр веса в
+                                    зависимости от настройки `Весовой категории` (для KATA вместо веса будет показан
+                                    `KATA`)
+                                </li>
+                                <li>&#9679;&#9;<strong>{weightFrom}</strong>: Значение настройки возрастной категории
+                                    для `Вес от`
+                                </li>
+                                <li>&#9679;&#9;<strong>{weightTo}</strong>: Значение установки весовой категории `Вес
+                                    до`
+                                </li>
+                                <li>&#9679;&#9;<strong>{grades}</strong>: Предварительный просмотр оценок категории</li>
+                            </ul>
+                            <p class="mt-2 mb-2" id="nameTemplate">
+                                NAME TEMPLATE:
+                            </p>
+                        </div>
+                        <div class="border-b border-stroke dark:border-strokedark">
+                        </div>
+                    </div>
+
                     <div class="sm:inline-grid sm:grid-cols-2 gap-4 m-auto">
-                        <button type="submit"
-                                class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                        <button type="submit" id="createButton"
+                                class="hidden max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Создать
                         </button>
                         <a th:href="@{/admin/categories/weight-categories}"
@@ -138,27 +234,274 @@
 
     <script>
         const selectedValuesMap = new Map();
+        const newCategoryBlock = $('#newCategoryBlock');
+        const createButton = $('#createButton');
 
         function handleSelectChange(event, thisEl) {
             const selectElement = event.target;
             const selectedValue = selectElement.value;
             const selectId = thisEl.id;
 
-            // Если значение уже было выбрано, удаляем его из Map
             if (selectedValuesMap.has(selectId) && selectedValuesMap.get(selectId) === selectedValue) {
-                selectedValuesMap.delete(selectId);
-                let elements = document.getElementById(selectId).options;
-
-                for (let element of elements) {
-                    element.selected = false;
+                if (selectId !== 'age' && selectId !== 'gender' && selectId !== 'categoryType') {
+                    deleteFromMapAndSelect(selectId);
                 }
             } else {
-                // Если значение не было выбрано ранее, добавляем его в Map
                 selectedValuesMap.set(selectId, selectedValue);
             }
-
+            disableWeight();
+            showHideNewCategoryBlock();
         }
 
+        function deleteFromMapAndSelect(selectId) {
+            selectedValuesMap.delete(selectId);
+            let elements = document.getElementById(selectId).options;
+
+            for (let element of elements) {
+                element.selected = false;
+            }
+        }
+
+        function showCategoryBlock() {
+            const nameTemplateElement = document.getElementById('nameTemplate');
+            const nameInput = document.getElementById('name');
+            if (nameInput.value === '') {
+                nameTemplateElement.textContent = getDefaultCategoryName();
+            } else {
+                updateNameTemplate();
+            }
+            newCategoryBlock.show();
+            createButton.show();
+        }
+
+        function hideCategoryBlock() {
+            newCategoryBlock.hide();
+            createButton.hide();
+        }
+
+        function showHideNewCategoryBlock() {
+            if (selectedValuesMap.has('age') && selectedValuesMap.has('gender') && selectedValuesMap.has('categoryType')) {
+                if (selectedValuesMap.get('categoryType').includes('kata')) {
+                    showCategoryBlock();
+                } else if (selectedValuesMap.get('categoryType').includes('kumite') && selectedValuesMap.has('weight')) {
+                    showCategoryBlock();
+                } else {
+                    hideCategoryBlock();
+                }
+            } else {
+                hideCategoryBlock();
+            }
+        }
+
+        function disableWeight() {
+            if (selectedValuesMap.has('categoryType') && selectedValuesMap.get('categoryType').includes('kata')) {
+                $('#weight').prop('disabled', 'disabled');
+                deleteFromMapAndSelect('weight');
+            } else {
+                $('#weight').prop('disabled', false)
+            }
+        }
+
+        function getDefaultCategoryName() {
+            let defaultCategoryName = getAge() + ', синкёкусинкай - ' + getWeight();
+            let grade = getGrades();
+            if (grade !== '') {
+                defaultCategoryName += ' (' + grade + ')';
+            }
+            return defaultCategoryName;
+        }
+
+        function updateNameTemplate() {
+            const nameInput = document.getElementById('name');
+            const nameTemplateElement = document.getElementById('nameTemplate');
+            if (nameInput && nameTemplateElement) {
+                if (nameInput.value === '') {
+                    nameTemplateElement.textContent = getDefaultCategoryName();
+                } else {
+                    nameTemplateElement.textContent = nameInput.value
+                        .replace('{ageGroup}', getAgeGroup())
+                        .replace('{seniors}', getSeniors())
+                        .replace('{adults}', getAdults())
+                        .replace('{juniors}', getJuniors())
+                        .replace('{team}', getTeam())
+                        .replace('{type}', getType())
+                        .replace('{sex}', getSex())
+                        .replace('{age}', getAge())
+                        .replace('{categoryAgeName}', getCategoryAgeName())
+                        .replace('{ageFrom}', getAgeFrom())
+                        .replace('{ageTo}', getAgeTo())
+                        .replace('{ageGroup}', getAgeGroup())
+                        .replace('{weight}', getWeight())
+                        .replace('{weightFrom}', getWeightFrom())
+                        .replace('{weightTo}', getWeightTo())
+                        .replace('{grades}', getGrades());
+                }
+            }
+        }
+
+        function checkAgeGroup(age) {
+            if (age <= 12) return 'до 12';
+            else if (age <= 16) return 'до 16';
+            else if (age < 18) return 'до 18';
+            else return 'взрослые';
+        }
+
+        function getAgeGroup() {
+            let ageId = selectedValuesMap.get('age');
+            let age = $('#' + ageId);
+            let fromAge = age.attr('age-from-age');
+            let toAge = age.attr('age-to-age');
+            if (fromAge !== 0) {
+                return checkAgeGroup(fromAge);
+            } else if (toAge !== 0) {
+                return checkAgeGroup(toAge);
+            } else {
+                return 'defaultValueForAgeGroup';
+            }
+        }
+
+        function getSeniors() {
+            let ageId = selectedValuesMap.get('age');
+            let age = $('#' + ageId);
+            let fromAge = age.attr('age-from-age');
+            if (fromAge >= 35) {
+                return 'да';
+            } else {
+                return 'нет';
+            }
+        }
+
+        function getAdults() {
+            let ageId = selectedValuesMap.get('age');
+            let age = $('#' + ageId);
+            let fromAge = age.attr('age-from-age');
+            if (fromAge >= 18) {
+                return 'да';
+            } else {
+                return 'нет';
+            }
+        }
+
+        function getJuniors() {
+            let ageId = selectedValuesMap.get('age');
+            let age = $('#' + ageId);
+            let toAge = age.attr('age-to-age');
+            if (toAge === 18) {
+                return 'да';
+            } else {
+                return 'нет';
+            }
+        }
+
+        function getTeam() {
+            let categoryType = selectedValuesMap.get('categoryType');
+            return categoryType.includes('team') ? 'да' : 'нет';
+        }
+
+        function getType() {
+            let categoryType = selectedValuesMap.get('categoryType');
+            return categoryType.includes('kata') ? 'ката' : 'кумитэ';
+        }
+
+        function getSex() {
+            let genderId = selectedValuesMap.get('gender');
+            let gender = $('#' + genderId);
+            return gender.attr('gender-label');
+        }
+
+        function getAge() {
+            let gender = getSex();
+            let ageGroup = getAgeGroup();
+            let categoryAgeName = getCategoryAgeName();
+            if (gender === 'Женский') {
+                if (ageGroup === 'до 12') {
+                    gender = 'Девочки';
+                } else if (ageGroup === 'до 16') {
+                    gender = 'Девушки';
+                } else if (ageGroup === 'до 18') {
+                    gender = 'Юниорки';
+                } else {
+                    gender = 'Женщины';
+                }
+            } else if (gender === 'Мужской') {
+                if (ageGroup === 'до 12') {
+                    gender = 'Мальчики';
+                } else if (ageGroup === 'до 16') {
+                    gender = 'Юноши';
+                } else if (ageGroup === 'до 18') {
+                    gender = 'Юниоры';
+                } else {
+                    gender = 'Мужчины';
+                }
+            } else {
+                gender = 'Смешанная';
+            }
+            let ageGroupResult = '';
+            if (categoryAgeName !== undefined) {
+                ageGroupResult = ageGroup !== 'взрослые' ? categoryAgeName + ' лет' : categoryAgeName;
+            }
+            return gender + ' ' + ageGroupResult;
+        }
+
+        function getCategoryAgeName() {
+            let categoryAgeNameId = selectedValuesMap.get('age');
+            let categoryAgeName = $('#' + categoryAgeNameId);
+            return categoryAgeName.attr('age-name');
+        }
+
+        function getAgeFrom() {
+            let ageId = selectedValuesMap.get('age');
+            let age = $('#' + ageId);
+            return age.attr('age-from-age');
+        }
+
+        function getAgeTo() {
+            let ageId = selectedValuesMap.get('age');
+            let age = $('#' + ageId);
+            return age.attr('age-to-age');
+        }
+
+        function getWeight() {
+            let weightId = selectedValuesMap.get('weight');
+            let weight = $('#' + weightId);
+            let toWeight = weight.attr('weight-to-weight');
+            let fromWeight = weight.attr('weight-from-weight');
+            let minCategory = weight.attr('weight-min-category');
+            let maxCategory = weight.attr('weight-max-category');
+
+            let weightText;
+            if (minCategory && maxCategory) {
+                weightText = 'Абсолюная';
+            } else if (maxCategory) {
+                weightText = fromWeight + '+ кг';
+            } else {
+                weightText = toWeight + ' кг';
+            }
+
+            return 'весовая категория ' + weightText;
+        }
+
+        function getWeightFrom() {
+            let weightId = selectedValuesMap.get('weight');
+            let weight = $('#' + weightId);
+            return weight.attr('weight-from-weight');
+        }
+
+        function getWeightTo() {
+            let weightId = selectedValuesMap.get('weight');
+            let weight = $('#' + weightId);
+            return weight.attr('weight-to-weight');
+        }
+
+        function getGrades() {
+            if (selectedValuesMap.has('grade')) {
+                let gradeId = selectedValuesMap.get('grade');
+                let grade = $('#' + gradeId);
+                return grade.attr('grade-label');
+            } else {
+                return '';
+            }
+        }
     </script>
 </main>
 
