@@ -1410,6 +1410,9 @@ body{
 .grid-cols-12{
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .grid-cols-3{
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -3149,6 +3152,9 @@ body{
   .sm\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .sm\:inline-grid{
+    display: inline-grid;
+  }
 
   .sm\:grid-cols-5{
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -3503,6 +3509,16 @@ body{
   .\32xl\:mt-7{
     margin-top: 1.75rem;
   }
+  .\32xl\:inline-grid{
+    display: inline-grid;
+  }
+  .\32xl\:grid-cols-5{
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .\32xl\:block{
+    display: block;
+  }
 
   .\32xl\:mt-7\.5{
     margin-top: 1.875rem;
@@ -3539,17 +3555,47 @@ body{
     padding-left: 1.875rem;
     padding-right: 1.875rem;
   }
+  .\32xl\:flex{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .\32xl\:flex-col{
+    flex-direction: column;
+  }
+  .\32xl\:hidden{
+    display: none;
+  }
+
+
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1500px) {
   .xxl\:table-cell {
     display: table-cell;
   }
-}
-@media (max-width: 1600px) {
-  .xxl\:hidden {
+
+  .xxl\:flex{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .xxl\:flex-col{
+    flex-direction: column;
+  }
+  .xxl\:hidden{
     display: none;
   }
+  .xxl\:inline-grid {
+    display: inline-grid;
+  }
+
+  .xxl\:grid-cols-5{
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
 }
 /*!********************************************************************************************************************************************************************************!*\
   !*** css ../node_modules/css-loader/dist/cjs.js!../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!../node_modules/prismjs/plugins/toolbar/prism-toolbar.css ***!
@@ -3644,4 +3690,8 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
 
 .w-1\/5 {
   width: 20%;
+}
+
+.contents {
+  display: contents;
 }

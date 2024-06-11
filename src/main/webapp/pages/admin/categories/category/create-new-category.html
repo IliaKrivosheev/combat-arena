@@ -34,8 +34,8 @@
             </nav>
         </div>
         <!-- Breadcrumb End -->
-        <div class="flex flex-col gap-10">
-            <div class="max-w-900px mx-auto w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div class="gap-10 flex flex-col">
+            <div class="mx-auto w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                     <h3 class="font-medium text-black dark:text-white" style="text-align: center">
                         Создание новой категории
@@ -44,69 +44,83 @@
                 <form action="#" th:action="@{/admin/categories/create-new-category}"
                       method="post"
                       class="flex flex-col gap-5.5 p-6.5">
-                    <div>
-                        <label for="age" class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
-                            Возрастная категория
-                        </label>
-                        <div class="relative z-20 bg-white dark:bg-form-input">
-                            <select onclick="handleSelectChange(this)" th:size="${ageCategories.size()}" id="age" name="age" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input overflow-hidden">
-                                <option th:each="ageCategoty : ${ageCategories}" th:value="${ageCategoty.uuid}"
-                                    th:text="${ageCategoty.name + ' : ' + ageCategoty.getFromAge().toString() + '-' + ageCategoty.getToAge().toString()}">
-                            </select>
+                    <div class="xxl:inline-grid sm:inline-grid gap-5.5 p-6.5 xxl:grid-cols-5 sm:grid-cols-2">
+                        <div style="min-width: 145px;">
+                            <label for="age"
+                                   class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
+                                Возрастная категория
+                            </label>
+                            <div class="relative z-20 bg-white dark:bg-form-input">
+                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="age" name="age"
+                                        class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                                    <option th:each="ageCategoty : ${ageCategories}" th:value="${ageCategoty.uuid}"
+                                            th:text="${ageCategoty.name + ' : ' + ageCategoty.getFromAge().toString() + '-' + ageCategoty.getToAge().toString()}">
+                                </select>
+                            </div>
+                        </div>
+                        <div style="min-width: 130px;">
+                            <label for="gender"
+                                   class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
+                                Пол
+                            </label>
+                            <div class="relative z-20 bg-white dark:bg-form-input">
+                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="gender" name="gender"
+                                        class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                                    <option th:each="gender : ${genders}" th:value="${gender}"
+                                            th:text="${gender.getLabel()}">
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="grade"
+                                   class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
+                                Тип категории
+                            </label>
+                            <div class="relative z-20 bg-white dark:bg-form-input">
+                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="21" id="categoryType"
+                                        name="categoryType"
+                                        class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                                    <optgroup label="Индивидуальный" style="font-weight: bold">
+                                        <option value="kumite">Кумитэ</option>
+                                        <option value="kata">Ката</option>
+                                    </optgroup>
+                                    <optgroup label="Командный" style="font-weight: bold">
+                                        <option value="kumite-team">Кумитэ Команда</option>
+                                        <option value="kata-team">Ката Команда</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="min-width: 230px;">
+                            <label for="weight"
+                                   class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
+                                Весовая категория
+                            </label>
+                            <div class="relative z-20 bg-white dark:bg-form-input">
+                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="weight" name="weight"
+                                        class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                                    <option th:each="weightCategory : ${weightCategories}"
+                                            th:value="${weightCategory.uuid}"
+                                            th:text="${'весовая категория ' + (weightCategory.maxCategory ? '' + weightCategory.fromWeight.intValue() + '+ кг' : weightCategory.toWeight.intValue() + ' кг')}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="grade"
+                                   class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
+                                Пояс
+                            </label>
+                            <div class="relative z-20 bg-white dark:bg-form-input">
+                                <select onclick="handleSelectChange(event, this)" onKeyDown="handleSelectChange(event, this)" size="22" id="grade" name="grade"
+                                        class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input">
+                                    <option th:each="grade : ${grades}" th:value="${grade}"
+                                            th:text="${grade.getLabel()}">
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <label for="weight" class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
-                            Весовая категория
-                        </label>
-                        <div class="relative z-20 bg-white dark:bg-form-input">
-                            <select onchange="handleSelectChange(event)" th:size="${ageCategories.size()}" id="weight" name="weight" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input overflow-hidden">
-                                <option th:each="weightCategory : ${weightCategories}" th:value="${weightCategory.uuid}"
-                                        th:text="${'весовая категория ' + (weightCategory.maxCategory ? '' + weightCategory.fromWeight.intValue() + '+ кг' : weightCategory.toWeight.intValue() + ' кг')}">
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="gender" class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
-                            Пол
-                        </label>
-                        <div class="relative z-20 bg-white dark:bg-form-input">
-                            <select onchange="handleSelectChange(event)" th:size="${genders.size()}" id="gender" name="gender" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input overflow-hidden">
-                                <option th:each="gender : ${genders}" th:value="${gender}"
-                                    th:text="${gender.getLabel()}">
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="grade" class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
-                            Пояс
-                        </label>
-                        <div class="relative z-20 bg-white dark:bg-form-input">
-                            <select onchange="handleSelectChange(event)" th:size="${grades.size()}" id="grade" name="grade" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input overflow-hidden">
-                                <option th:each="grade : ${grades}" th:value="${grade}"
-                                    th:text="${grade.getLabel()}">
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="grade" class="mb-3 block text-sm font-medium text-black dark:text-white text-center">
-                            Тип категории
-                        </label>
-                        <div class="relative z-20 bg-white dark:bg-form-input">
-                            <select onchange="handleSelectChange(event)" size="6" id="categoryType" name="categoryType" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-12 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input overflow-hidden">
-                                <optgroup label="Индивидуальный">
-                                    <option value="kumite">Кумитэ</option>
-                                    <option value="kata">Ката</option>
-                                </optgroup>
-                                <optgroup label="Командный">
-                                    <option value="kumite-team">Кумитэ Команда</option>
-                                    <option value="kata-team">Ката Команда</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                    <div class="sm:inline-grid sm:grid-cols-2 gap-4 m-auto">
                         <button type="submit"
                                 class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Создать
@@ -121,10 +135,30 @@
         </div>
 
     </div>
+
     <script>
-        function handleSelectChange(tt) {
-            console.log(tt.value);
+        const selectedValuesMap = new Map();
+
+        function handleSelectChange(event, thisEl) {
+            const selectElement = event.target;
+            const selectedValue = selectElement.value;
+            const selectId = thisEl.id;
+
+            // Если значение уже было выбрано, удаляем его из Map
+            if (selectedValuesMap.has(selectId) && selectedValuesMap.get(selectId) === selectedValue) {
+                selectedValuesMap.delete(selectId);
+                let elements = document.getElementById(selectId).options;
+
+                for (let element of elements) {
+                    element.selected = false;
+                }
+            } else {
+                // Если значение не было выбрано ранее, добавляем его в Map
+                selectedValuesMap.set(selectId, selectedValue);
+            }
+
         }
+
     </script>
 </main>
 
