@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
       layout:decorate="~{layouts/admin-layout}">
 <head>
     <meta charset="UTF-8"/>
@@ -45,7 +45,7 @@
                       method="post"
                       class="flex flex-col gap-5.5 p-6.5">
                     <div>
-                        <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                        <label for="fromWeight" class="mb-3 block text-sm font-medium text-black dark:text-white">
                             Вес от
                         </label>
                         <input type="number" id="fromWeight" name="fromWeight"
@@ -53,7 +53,7 @@
                                class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
                     </div>
                     <div>
-                        <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                        <label for="toWeight" class="mb-3 block text-sm font-medium text-black dark:text-white">
                             Вес до
                         </label>
                         <input type="number" id="toWeight" name="toWeight"

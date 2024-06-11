@@ -20,8 +20,6 @@ import java.util.UUID;
 @Table(name = "weight_сategories")
 @EqualsAndHashCode(callSuper = true)
 public class WeightCategory extends AbstractAuditingEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -693004364284790253L;
 
     @Column
     private String uuid = UUID.randomUUID().toString();

@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
       layout:decorate="~{layouts/admin-layout}">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Возрастные категории | Combat Arena</title>
+    <title>Администрирование | Combat Arena</title>
     <link rel="icon" th:href="@{/resources/images/favicon.ico}">
     <link th:href="@{/resources/css/style.css}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-            crossorigin="anonymous"></script>
 </head>
 
 <body x-data="{ page: 'alerts', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -24,7 +21,7 @@
         <!-- Breadcrumb Start -->
         <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 class="text-title-md2 font-bold text-black dark:text-white">
-                Возрастные категории
+                Администрирование
             </h2>
 
             <nav>
@@ -32,56 +29,112 @@
                     <li>
                         <a class="font-medium" th:href="@{/admin/categories/administration}">Категории /</a>
                     </li>
-                    <li class="font-medium text-primary">Возрастные категории</li>
+                    <li class="font-medium text-primary">Администрирование</li>
                 </ol>
             </nav>
         </div>
+        <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <a th:href="@{/admin/categories/create-new-category}"
+                    class="max-w-300px mx-auto w-full inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                Создать
+            </a>
+        </div>
         <!-- Breadcrumb End -->
 
-        <div class="gap-10 hidden sm:flex sm:flex-col">
+        <div class="gap-10 hidden xl:flex xl:flex-col">
             <!-- ====== Table Start -->
             <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 mb-6">
                 <div class="max-w-full overflow-hidden">
                     <table class="w-full table-auto">
                         <thead>
                         <tr class="bg-gray-2 text-left dark:bg-meta-4">
-                            <th id="numTh" class="hidden xl:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th rowspan="2" id="numTh" class="hidden xxl:table-cell min-w-[50px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 №
                             </th>
-                            <th id="nameTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th rowspan="2" id="categoryNameTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Полное название
+                            </th>
+                            <th rowspan="2" id="typeTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Тип
+                            </th>
+                            <th rowspan="2" id="teamTh" class="hidden xxl:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Команда
+                            </th>
+                            <th rowspan="2" id="genderTh" class="py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Пол
+                            </th>
+                            <th colspan="3" id="ageCategoryTh" class="border-b border-[#eee] dark:border-strokedark py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Возростная группа
+                            </th>
+                            <th colspan="2" id="weightCategoryTh" class="border-b border-[#eee] dark:border-strokedark py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Весовая группа
+                            </th>
+                            <th rowspan="2" id="actionsTh" class="py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Действия
+                            </th>
+                        </tr>
+                        <tr class="bg-gray-2 text-left dark:bg-meta-4">
+                            <th id="nameTh" class="min-w-[90px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Название
                             </th>
-                            <th id="fromAgeTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="fromAgeTh" class="min-w-[90px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Возраст от
                             </th>
-                            <th id="toAgeTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="toAgeTh" class="min-w-[90px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Возраст до
                             </th>
-                            <th id="actionsTh" class="py-4 px-4 font-medium text-black dark:text-white text-center">
-                                Действия
+                            <th id="fromWeightTh" class="min-w-[90px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Вес от
+                            </th>
+                            <th id="toWeightTh" class="min-w-[90px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                                Вес до
                             </th>
                         </tr>
                         </thead>
                         <tbody id="categories">
-                        <tr th:each="category,itrStat : ${ageCategories}">
-                            <td data-label="№" class="hidden xl:table-cell border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark">
+                        <tr th:each="category,itrStat : ${categories}">
+                            <td data-label="№" class="hidden xxl:table-cell border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark">
                                 <p class="text-black dark:text-white text-center" th:text="${itrStat.index + 1}"></p>
+                            </td>
+                            <td data-label="Полное название"
+                                class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                                <p class="text-black dark:text-white text-center">[[${category.categoryName}]]</p>
+                            </td>
+                            <td data-label="Тип"
+                                class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                                <p class="text-black dark:text-white text-center">[[${category.type}]]</p>
+                            </td>
+                            <td data-label="Команда"
+                                class="hidden xxl:table-cell border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                                <p class="text-black dark:text-white text-center">[[${category.team}]]</p>
+                            </td>
+                            <td data-label="Пол"
+                                class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                                <p class="text-black dark:text-white text-center">[[${category.gender}]]</p>
                             </td>
                             <td data-label="Название"
                                 class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                                <p class="text-black dark:text-white text-center">[[${category.name}]]</p>
+                                <p class="text-black dark:text-white text-center">[[${category.ageCategory.name}]]</p>
                             </td>
                             <td data-label="Возраст от"
                                 class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                                <p class="text-black dark:text-white text-center">[[${category.fromAge}]]</p>
+                                <p class="text-black dark:text-white text-center">[[${category.ageCategory.fromAge}]]</p>
                             </td>
                             <td data-label="Возраст до"
                                 class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                                <p class="text-black dark:text-white text-center">[[${category.toAge}]]</p>
+                                <p class="text-black dark:text-white text-center">[[${category.ageCategory.toAge}]]</p>
+                            </td>
+                            <td data-label="Возраст от"
+                                class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                                <p class="text-black dark:text-white text-center">[[${category.weightCategory.fromAge}]]</p>
+                            </td>
+                            <td data-label="Возраст до"
+                                class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
+                                <p class="text-black dark:text-white text-center">[[${category.weightCategory.toAge}]]</p>
                             </td>
                             <td data-label="Действия" class="border-b border-[#eee] dark:border-strokedark py-4 px-4 font-medium text-black dark:text-white">
                                 <div class="flex justify-center items-center space-x-3.5">
-                                    <a th:href="@{/admin/categories/edit-age-category(uuid=${category.uuid})}"
+                                    <a th:href="@{/admin/categories/edit-category(uuid=${category.uuid})}"
                                        class="hover:text-primary">
                                         <svg class="fill-current"
                                              width="18"
@@ -123,14 +176,32 @@
                 </div>
             </div>
         </div>
-
-        <div class="sm:hidden">
+        <div class="xl:hidden">
             <div class="gap-4">
-                <div th:each="category,itrStat : ${ageCategories}" class="border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 mb-6 rounded-lg shadow-md overflow-hidden">
+                <div th:each="category,itrStat : ${categories}" class="border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 mb-6 rounded-lg shadow-md overflow-hidden">
                     <div class="flex justify-between items-center mb-2 border-b border-[#eee] dark:border-strokedark">
                         <span class="text-black dark:text-white text-center m-auto" th:text="${itrStat.index + 1}"></span>
                     </div>
                     <div class="px-6 py-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-black dark:text-white">Полное название</span>
+                            <span class="text-black dark:text-white">[[${category.name}]]</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-black dark:text-white">Тип</span>
+                            <span class="text-black dark:text-white">[[${category.name}]]</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-black dark:text-white">Команда</span>
+                            <span class="text-black dark:text-white">[[${category.name}]]</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-black dark:text-white">Пол</span>
+                            <span class="text-black dark:text-white">[[${category.name}]]</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-2 border-b border-[#eee] dark:border-strokedark">
+                            <span class="text-black dark:text-white text-center m-auto" th:text="${'Возростная группа'}"></span>
+                        </div>
                         <div class="flex justify-between items-center mb-2">
                             <span class="font-medium text-black dark:text-white">Название</span>
                             <span class="text-black dark:text-white">[[${category.name}]]</span>
@@ -143,9 +214,20 @@
                             <span class="font-medium text-black dark:text-white">Возраст до</span>
                             <span class="text-black dark:text-white">[[${category.toAge}]]</span>
                         </div>
+                        <div class="flex justify-between items-center mb-2 border-b border-[#eee] dark:border-strokedark">
+                            <span class="text-black dark:text-white text-center m-auto" th:text="${'Весовая  группа'}"></span>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-black dark:text-white">Вес от</span>
+                            <span class="text-black dark:text-white">[[${category.toAge}]]</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-black dark:text-white">Вес до</span>
+                            <span class="text-black dark:text-white">[[${category.toAge}]]</span>
+                        </div>
                     </div>
                     <div class="bg-gray-100 dark:bg-gray-800 flex justify-between">
-                        <a th:href="@{/admin/categories/edit-age-category(uuid=${category.uuid})}" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-primary py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                        <a th:href="@{/admin/categories/edit-category(uuid=${category.uuid})}" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-primary py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Редактировать
                         </a>
                         <button th:onclick="deleteCategory([[${category.uuid}]])" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-red-700 py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
@@ -155,46 +237,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- ====== Table End -->
-        <div class="max-w-900px mx-auto w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-            <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-                <h3 class="font-medium text-black dark:text-white text-center">
-                    Создать новую возрастную категорию
-                </h3>
-            </div>
-            <form action="#" th:action="@{/admin/categories/create-age-categories}" method="post"
-                  class="flex flex-col gap-5.5 p-6.5">
-                <div>
-                    <label for="name" class="mb-3 block text-sm font-medium text-black dark:text-white">
-                        Название
-                    </label>
-                    <input type="text" id="name" name="name"
-                           placeholder="Название"
-                           class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
-                </div>
-                <div>
-                    <label for="fromAge" class="mb-3 block text-sm font-medium text-black dark:text-white">
-                        Возраст от
-                    </label>
-                    <input type="number" id="fromAge" name="fromAge"
-                           placeholder="Возраст от"
-                           class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
-                </div>
-                <div>
-                    <label for="toAge" class="mb-3 block text-sm font-medium text-black dark:text-white">
-                        Возраст до
-                    </label>
-                    <input type="number" id="toAge" name="toAge"
-                           placeholder="Возраст до"
-                           class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
-                </div>
-                <button type="submit"
-                        class="max-w-300px mx-auto w-full inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
-                    Создать
-                </button>
-            </form>
-        </div>
     </div>
     <script>
         function deleteCategory (uuid) {
@@ -203,7 +245,7 @@
             if (confirm("Вы уверены, что хотите удалить данную категорию?")) {
                 $.ajax({
                     type: 'post',
-                    url: '/admin/categories/delete-age-category',
+                    url: '/admin/categories/delete-category',
                     data: { 'uuid': uuid },
                     success: function (data) {
                         if(data === 'error') {
@@ -211,7 +253,7 @@
                             alert('Не удалось удалить категорию. Попробуйте обновить страницу и попробовать еще раз.')
                         } else {
                             console.log('Категория успешно удалена');
-                            location.replace('/admin/categories/age-categories')
+                            location.replace('/admin/categories/categories')
                         }
                     },
                     error: function (xhr, status, error) {

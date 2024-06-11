@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
       layout:decorate="~{layouts/admin-layout}">
 <head>
     <meta charset="UTF-8"/>
@@ -8,9 +8,9 @@
     <title>Весовые категории | Combat Arena</title>
     <link rel="icon" th:href="@{/resources/images/favicon.ico}">
     <link th:href="@{/resources/css/style.css}" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
 </head>
 
 <body x-data="{ page: 'alerts', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -45,22 +45,22 @@
                     <table class="w-full table-auto">
                         <thead>
                         <tr class="bg-gray-2 text-left dark:bg-meta-4">
-                            <th class="hidden xl:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="numTh" class="hidden xl:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 №
                             </th>
-                            <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="fromWeightTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Вес от
                             </th>
-                            <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="toWeightTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Вес до
                             </th>
-                            <th class="hidden md:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="minTh" class="hidden md:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Минимальная
                             </th>
-                            <th class="hidden md:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="maxTh" class="hidden md:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Максимальная
                             </th>
-                            <th class="py-4 px-4 font-medium text-black dark:text-white text-center">
+                            <th id="actionsTh" class="py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Действия
                             </th>
                         </tr>
@@ -70,15 +70,15 @@
                             <td data-label="№" class="hidden xl:table-cell border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark">
                                 <p class="text-black dark:text-white text-center" th:text="${itrStat.index + 1}"></p>
                             </td>
-                            <th data-label="Вес от"
+                            <td data-label="Вес от"
                                 class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                                <p class="text-black dark:text-white">[[${category.fromWeight}]]</p>
-                            </th>
-                            <th data-label="Вес до"
+                                <p class="text-black dark:text-white text-center">[[${category.fromWeight}]]</p>
+                            </td>
+                            <td data-label="Вес до"
                                 class="border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                                <p class="text-black dark:text-white">[[${category.toWeight}]]</p>
-                            </th>
-                            <th data-label="Минимальная"
+                                <p class="text-black dark:text-white text-center">[[${category.toWeight}]]</p>
+                            </td>
+                            <td data-label="Минимальная"
                                 class="hidden md:table-cell border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
                                 <div th:if="${category.minCategory == true}">
                                     <svg width="11"
@@ -103,8 +103,8 @@
                                               d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </div>
-                            </th>
-                            <th data-label="Максимальная"
+                            </td>
+                            <td data-label="Максимальная"
                                 class="hidden md:table-cell border-b border-[#eee] dark:border-strokedark min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
                                 <div th:if="${category.maxCategory == true}">
                                     <svg width="11"
@@ -129,8 +129,8 @@
                                               d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </div>
-                            </th>
-                            <th data-label="Действия" class="border-b border-[#eee] dark:border-strokedark py-4 px-4 font-medium text-black dark:text-white">
+                            </td>
+                            <td data-label="Действия" class="border-b border-[#eee] dark:border-strokedark py-4 px-4 font-medium text-black dark:text-white">
                                 <div class="flex justify-center items-center space-x-3.5">
                                     <a th:href="@{/admin/categories/edit-weight-category(uuid=${category.uuid})}"
                                        class="hover:text-primary">
@@ -147,7 +147,7 @@
                                         </svg>
                                     </a>
                                     <a id="delete-button" th:onclick="deleteCategory([[${category.uuid}]])"
-                                       class="delete-button hover:text-primary">
+                                       class="delete-button hover:text-primary cursor-pointer">
                                         <svg class="fill-current"
                                              width="18"
                                              height="18"
@@ -165,7 +165,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                            </th>
+                            </td>
 
                         </tr>
                         </tbody>
@@ -213,7 +213,7 @@
             <form action="#" th:action="@{/admin/categories/create-weight-categories}" method="post"
                   class="flex flex-col gap-5.5 p-6.5">
                 <div>
-                    <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                    <label for="fromWeight" class="mb-3 block text-sm font-medium text-black dark:text-white">
                         Вес от
                     </label>
                     <input type="number" id="fromWeight" name="fromWeight"
@@ -221,7 +221,7 @@
                            class="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"/>
                 </div>
                 <div>
-                    <label class="mb-3 block text-sm font-medium text-black dark:text-white">
+                    <label for="toWeight" class="mb-3 block text-sm font-medium text-black dark:text-white">
                         Вес до
                     </label>
                     <input type="number" id="toWeight" name="toWeight"

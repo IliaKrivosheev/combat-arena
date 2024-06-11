@@ -29,10 +29,10 @@ public class AgeCategory extends AbstractAuditingEntity implements Serializable 
     private String uuid = UUID.randomUUID().toString();
 
     @Column
-    private Double fromAge;
+    private Integer fromAge;
 
     @Column
-    private Double toAge;
+    private Integer toAge;
 
     @Column
     private Boolean minCategory = false;

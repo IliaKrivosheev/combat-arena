@@ -49,15 +49,15 @@ public class AgeCategoriesController extends BaseController {
         AgeCategory category = ageCategoryRepository.findByUuid(uuid);
         if(category == null) return errorPage(model);
         if(ageCategory.getFromAge() == null) {
-            ageCategory.setFromAge(0.);
+            ageCategory.setFromAge(0);
         }
         if(ageCategory.getToAge() == null) {
-            ageCategory.setToAge(0.);
+            ageCategory.setToAge(0);
         }
-        if(ageCategory.getFromAge().equals(0.)) {
+        if(ageCategory.getFromAge() == 0) {
             ageCategory.setMinCategory(true);
         }
-        if(ageCategory.getToAge().equals(0.)) {
+        if(ageCategory.getToAge() == 0) {
             ageCategory.setMaxCategory(true);
         }
         category.setName(ageCategory.getName());
@@ -76,15 +76,15 @@ public class AgeCategoriesController extends BaseController {
         log.info("Create New Age Category...");
         log.info("ageCategory: {}", ageCategory);
         if(ageCategory.getFromAge() == null) {
-            ageCategory.setFromAge(0.);
+            ageCategory.setFromAge(0);
         }
         if(ageCategory.getToAge() == null) {
-            ageCategory.setToAge(0.);
+            ageCategory.setToAge(0);
         }
-        if(ageCategory.getFromAge().equals(0.)) {
+        if(ageCategory.getFromAge() == 0) {
             ageCategory.setMinCategory(true);
         }
-        if(ageCategory.getToAge().equals(0.)) {
+        if(ageCategory.getToAge() == 0) {
             ageCategory.setMaxCategory(true);
         }
         ageCategoryRepository.save(ageCategory);
