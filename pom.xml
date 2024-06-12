@@ -9,11 +9,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.fsknso.competition</groupId>
-    <artifactId>fsknso-competition</artifactId>
+    <groupId>com.combat.arena</groupId>
+    <artifactId>combat-arena</artifactId>
     <version>1.0.0</version>
-    <name>fsknso-competition</name>
-    <description>fsknso-competition</description>
+    <name>combat-arena</name>
+    <description>combat-arena</description>
     <packaging>war</packaging>
 
     <properties>
