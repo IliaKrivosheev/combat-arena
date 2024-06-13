@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -34,4 +35,8 @@ public class WeightCategory extends AbstractAuditingEntity implements Serializab
 
     @Column
     private Boolean maxCategory = false;
+
+    @Column
+    @NotNull
+    private String eventOrganizerUuid;
 }

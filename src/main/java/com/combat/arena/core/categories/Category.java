@@ -6,6 +6,7 @@ import com.combat.arena.core.common.AbstractAuditingEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -50,4 +51,8 @@ public class Category extends AbstractAuditingEntity implements Serializable {
     @Column
     @Enumerated(EnumType.STRING)
     private Grade grade;
+
+    @Column
+    @NotNull
+    private String eventOrganizerUuid;
 }

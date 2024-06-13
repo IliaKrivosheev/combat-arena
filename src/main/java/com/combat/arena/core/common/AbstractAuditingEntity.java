@@ -24,7 +24,7 @@ import java.time.ZoneId;
 public abstract class AbstractAuditingEntity extends BaseEntity {
     @CreatedBy
     @NotNull
-    @Column(name = "createdBy", nullable = false)
+    @Column(name = "created_by", nullable = false)
     private String createdBy = (SecurityContextHolder.getContext() != null &&
             SecurityContextHolder.getContext().getAuthentication() != null) ?
             SecurityContextHolder.getContext().getAuthentication().getName() : "anonimus";
@@ -35,7 +35,7 @@ public abstract class AbstractAuditingEntity extends BaseEntity {
     private LocalDateTime createdDate = LocalDateTime.now(ZoneId.systemDefault());
 
     @LastModifiedBy
-    @Column(name = "lastModifiedBy")
+    @Column(name = "last_modified_by")
     private String lastModifiedBy = (SecurityContextHolder.getContext() != null &&
             SecurityContextHolder.getContext().getAuthentication() != null) ?
             SecurityContextHolder.getContext().getAuthentication().getName() : createdBy;

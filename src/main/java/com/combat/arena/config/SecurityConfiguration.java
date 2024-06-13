@@ -36,7 +36,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/", "/api/new-user", HOME_PAGE).permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/", "/api/*", HOME_PAGE).permitAll()
                         .requestMatchers("/resources/css/**").permitAll()
                         .requestMatchers("/resources/js/**").permitAll()
                         .requestMatchers("/resources/images/**").permitAll()

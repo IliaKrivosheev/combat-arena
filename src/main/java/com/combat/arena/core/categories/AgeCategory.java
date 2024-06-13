@@ -39,4 +39,8 @@ public class AgeCategory extends AbstractAuditingEntity implements Serializable 
 
     @Column
     private Boolean maxCategory = false;
+
+    @Column
+    @NotNull
+    private String eventOrganizerUuid;
 }

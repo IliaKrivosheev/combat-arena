@@ -31,6 +31,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 100)
     private String password;
 
+    @Column
+    @NotNull
+    private String eventOrganizerUuid;
+
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

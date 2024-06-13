@@ -3,9 +3,9 @@ spring:
     name: fsknso-competition
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: root
+    url: jdbc:postgresql://localhost:5432/combat-arena
+    username: combat-arena-admin
+    password: cfbf6b2e-41d6-4a1e-af9a-955082faf1d1
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,3 +14,22 @@ spring:
     cache: false
     enable-spring-el-compiler: true
     enabled: true
+
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 25
+
+logging:
+  level:
+    com.combat.arena: debug
+    org.thymeleaf: warn
+    org.thymeleaf.TemplateEngine.TIMER: warn
+    org.springframework.jndi: warn
+    org.org.hibernate: error
+
+#    url: jdbc:postgresql://localhost:5432/combat-arena
+#    username: combat-arena-admin
+
+#    password: cfbf6b2e-41d6-4a1e-af9a-955082faf1d1
