@@ -1,6 +1,7 @@
 package com.combat.arena.core.categories;
 
 import com.combat.arena.core.common.AbstractAuditingEntity;
+import com.combat.arena.services.security.utils.SecurityUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -42,5 +43,5 @@ public class AgeCategory extends AbstractAuditingEntity implements Serializable 
 
     @Column
     @NotNull
-    private String eventOrganizerUuid;
+    private String eventOrganizerUuid = SecurityUtils.getCurrentOrganizerUuid();
 }

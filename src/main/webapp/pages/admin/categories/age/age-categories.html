@@ -81,7 +81,7 @@
                             </td>
                             <td data-label="Действия" class="border-b border-[#eee] dark:border-strokedark py-4 px-4 font-medium text-black dark:text-white">
                                 <div class="flex justify-center items-center space-x-3.5">
-                                    <a th:href="@{/admin/categories/edit-age-category(uuid=${category.uuid})}"
+                                    <a th:href="@{/admin/categories/age/edit(uuid=${category.uuid})}"
                                        class="hover:text-primary">
                                         <svg class="fill-current"
                                              width="18"
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-100 dark:bg-gray-800 flex justify-between">
-                        <a th:href="@{/admin/categories/edit-age-category(uuid=${category.uuid})}" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-primary py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                        <a th:href="@{/admin/categories/age/edit(uuid=${category.uuid})}" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-primary py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Редактировать
                         </a>
                         <button th:onclick="deleteCategory([[${category.uuid}]])" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-red-700 py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
@@ -163,7 +163,7 @@
                     Создать новую возрастную категорию
                 </h3>
             </div>
-            <form action="#" th:action="@{/admin/categories/create-age-categories}" method="post"
+            <form action="#" th:action="@{/admin/categories/age/create}" method="post"
                   class="flex flex-col gap-5.5 p-6.5">
                 <div>
                     <label for="name" class="mb-3 block text-sm font-medium text-black dark:text-white">
@@ -203,7 +203,7 @@
             if (confirm("Вы уверены, что хотите удалить данную категорию?")) {
                 $.ajax({
                     type: 'post',
-                    url: '/admin/categories/delete-age-category',
+                    url: '/admin/categories/age/delete',
                     data: { 'uuid': uuid },
                     success: function (data) {
                         if(data === 'error') {
@@ -211,7 +211,7 @@
                             alert('Не удалось удалить категорию. Попробуйте обновить страницу и попробовать еще раз.')
                         } else {
                             console.log('Категория успешно удалена');
-                            location.replace('/admin/categories/age-categories')
+                            location.replace('/admin/categories/age')
                         }
                     },
                     error: function (xhr, status, error) {

@@ -108,9 +108,17 @@ public final class SecurityUtils {
             ip = httpServletRequest.getRemoteAddr();
         }
         if (ip.contains(",")) {
-            // removing second of all remaining IP addresses from the chain
             ip = StringUtils.substringBefore(ip, ",");
         }
         return ip;
+    }
+
+    public static String getCurrentOrganizerUuid() {
+        User user = getCurrentUser();
+        if(user == null) {
+            return null;
+        }
+        String orgUuid = user.getEventOrganizerUuid();
+        return orgUuid == null || orgUuid.isEmpty() ? null : orgUuid;
     }
 }

@@ -41,7 +41,7 @@
                         Редактирование возрастной категории
                     </h3>
                 </div>
-                <form action="#" th:action="@{/admin/categories/edit-age-category(uuid=${category.uuid})}"
+                <form action="#" th:action="@{/admin/categories/age/edit(uuid=${category.uuid})}"
                       method="post"
                       class="flex flex-col gap-5.5 p-6.5">
                     <div>
@@ -73,7 +73,7 @@
                                 class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Обновить
                         </button>
-                        <a th:href="@{/admin/categories/age-categories}"
+                        <a th:href="@{/admin/categories/age}"
                            class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-meta-4 py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Назад
                         </a>

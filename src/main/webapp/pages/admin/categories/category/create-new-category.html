@@ -44,7 +44,7 @@
                         Создание новой категории
                     </h3>
                 </div>
-                <form action="#" th:action="@{/admin/categories/create-new-category}"
+                <form action="#" th:action="@{/admin/categories/create}"
                       method="post"
                       class="flex flex-col gap-5.5 p-6.5">
                     <div class="xxl:inline-grid sm:inline-grid gap-5.5 p-6.5 xxl:grid-cols-5 sm:grid-cols-2">
@@ -221,7 +221,7 @@
                                 class="hidden max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Создать
                         </button>
-                        <a th:href="@{/admin/categories/weight-categories}"
+                        <a th:href="@{/admin/categories/administration}"
                            class="max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-meta-4 py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Назад
                         </a>

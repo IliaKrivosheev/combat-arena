@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Весовые категории | Combat Arena</title>
-    <link rel="icon" th:href="@{/resources/images/favicon.ico}">
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet">
+    <link th:rel="icon" th:href="@{/resources/images/favicon.ico}">
+    <link th:href="@{/resources/css/style.css}" th:rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous"></script>
@@ -42,17 +42,17 @@
             <!-- ====== Table Start -->
             <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 mb-6">
                 <div class="max-w-full overflow-hidden">
-                    <table class="w-full table-auto">
+                    <table class="w-full table-auto" id="weightCategoriesTable">
                         <thead>
                         <tr class="bg-gray-2 text-left dark:bg-meta-4">
                             <th id="numTh" class="hidden xl:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 №
                             </th>
                             <th id="fromWeightTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
-                                Вес от
+                                <a href="#" id="sortByFromWeight"><span class="sort-arrow"></span> Вес от</a>
                             </th>
                             <th id="toWeightTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
-                                Вес до
+                                <a href="#" id="sortByToWeight"><span class="sort-arrow"></span> Вес до</a>
                             </th>
                             <th id="minTh" class="hidden md:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Минимальная
@@ -132,7 +132,7 @@
                             </td>
                             <td data-label="Действия" class="border-b border-[#eee] dark:border-strokedark py-4 px-4 font-medium text-black dark:text-white">
                                 <div class="flex justify-center items-center space-x-3.5">
-                                    <a th:href="@{/admin/categories/edit-weight-category(uuid=${category.uuid})}"
+                                    <a th:href="@{/admin/categories/weight/edit(uuid=${category.uuid})}"
                                        class="hover:text-primary">
                                         <svg class="fill-current"
                                              width="18"
@@ -192,7 +192,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-100 dark:bg-gray-800 flex justify-between">
-                        <a th:href="@{/admin/categories/edit-weight-category(uuid=${category.uuid})}" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-primary py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                        <a th:href="@{/admin/categories/weight/edit(uuid=${category.uuid})}" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-primary py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Редактировать
                         </a>
                         <button th:onclick="deleteCategory([[${category.uuid}]])" class="w-135px mx-auto inline-flex items-center justify-center rounded-md bg-red-700 py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
@@ -210,7 +210,7 @@
                     Создать новую весовую категорию
                 </h3>
             </div>
-            <form action="#" th:action="@{/admin/categories/create-weight-categories}" method="post"
+            <form action="#" th:action="@{/admin/categories/weight/create}" method="post"
                   class="flex flex-col gap-5.5 p-6.5">
                 <div>
                     <label for="fromWeight" class="mb-3 block text-sm font-medium text-black dark:text-white">
@@ -242,7 +242,7 @@
             if (confirm("Вы уверены, что хотите удалить данную категорию?")) {
                 $.ajax({
                     type: 'post',
-                    url: '/admin/categories/delete-weight-category',
+                    url: '/admin/categories/weight/delete',
                     data: { 'uuid': uuid },
                     success: function (data) {
                         if(data === 'error') {
@@ -250,7 +250,7 @@
                             alert('Не удалось удалить категорию. Попробуйте обновить страницу и попробовать еще раз.')
                         } else {
                             console.log('Категория успешно удалена');
-                            location.replace('/admin/categories/weight-categories')
+                            location.replace('/admin/categories/weight')
                         }
                     },
                     error: function (xhr, status, error) {
@@ -260,7 +260,89 @@
             }
         }
 
+        $(document).ready(function() {
+            var sortOrderFromWeight = 1; // Порядок сортировки для столбца "Вес от"
+            var sortOrderToWeight = 1;   // Порядок сортировки для столбца "Вес до"
+            var currentSortColumn = "";  // Текущий активный столбец для сортировки
+
+            // Функция для сортировки таблицы
+            function sortTable(columnIndex, sortOrder) {
+                var table, rows, switching, i, x, y, shouldSwitch;
+                table = document.getElementById("weightCategoriesTable");
+                switching = true;
+                while (switching) {
+                    switching = false;
+                    rows = table.rows;
+                    for (i = 1; i < (rows.length - 1); i++) {
+                        shouldSwitch = false;
+                        x = rows[i].getElementsByTagName("TD")[columnIndex];
+                        y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+                        if (sortOrder === 1) {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch= true;
+                                break;
+                            }
+                        } else if (sortOrder === -1) {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                shouldSwitch= true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+                }
+            }
+
+            // Функция для изменения стрелочки
+            function changeSortArrow(columnId, sortOrder) {
+                // Убираем активность у предыдущего столбца
+                if (currentSortColumn !== columnId) {
+                    $(".sort-arrow").removeClass("active up down");
+                }
+                // Устанавливаем активность для текущего столбца
+                $("#" + columnId + " .sort-arrow").addClass("active").removeClass("up down").addClass(sortOrder === 1 ? "up" : "down");
+                currentSortColumn = columnId;
+            }
+
+            // Обработчики событий для сортировки по столбцам
+            $("#sortByFromWeight").click(function() {
+                sortOrderFromWeight *= -1; // Переключение порядка сортировки
+                sortTable(1, sortOrderFromWeight); // Индекс столбца "Вес от" (начиная с 0)
+                changeSortArrow("sortByFromWeight", sortOrderFromWeight);
+            });
+
+            $("#sortByToWeight").click(function() {
+                sortOrderToWeight *= -1; // Переключение порядка сортировки
+                sortTable(2, sortOrderToWeight); // Индекс столбца "Вес до" (начиная с 0)
+                changeSortArrow("sortByToWeight", sortOrderToWeight);
+            });
+        });
+
     </script>
+
+    <style>
+        /* Стили для стрелочек */
+        .sort-arrow {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            opacity: 0.5; /* По умолчанию полупрозрачная */
+        }
+        .sort-arrow.active {
+            opacity: 1; /* Полностью видимая при наведении */
+        }
+        .sort-arrow.up {
+            border-bottom: 5px solid black; /* Стрелка вверх */
+        }
+        .sort-arrow.down {
+            border-top: 5px solid black; /* Стрелка вниз */
+        }
+    </style>
 </main>
 
 </body>

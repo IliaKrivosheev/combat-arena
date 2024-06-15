@@ -1,5 +1,6 @@
 package com.combat.arena.core.categories;
 
+import com.combat.arena.services.security.utils.SecurityUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.combat.arena.core.common.AbstractAuditingEntity;
 
@@ -54,5 +55,5 @@ public class Category extends AbstractAuditingEntity implements Serializable {
 
     @Column
     @NotNull
-    private String eventOrganizerUuid;
+    private String eventOrganizerUuid = SecurityUtils.getCurrentOrganizerUuid();
 }

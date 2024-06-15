@@ -1,6 +1,7 @@
 package com.combat.arena.config;
 
 import com.combat.arena.core.repository.UserRepository;
+import com.combat.arena.services.security.AuthoritiesConstants;
 import com.combat.arena.services.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +42,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/resources/js/**").permitAll()
                         .requestMatchers("/resources/images/**").permitAll()
                         .requestMatchers("/signup").anonymous()
-                        .requestMatchers("/admin/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/admin/signin")

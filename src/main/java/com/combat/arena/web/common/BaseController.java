@@ -3,12 +3,13 @@ package com.combat.arena.web.common;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Controller
 public class BaseController {
     protected String errorPage(Model model) {
-        return errorPage(model, "Something went wrong");
+        return errorPage(model, "Что-то пошло не так...");
     }
 
     protected String errorPage(Model model, String errorMsg) {

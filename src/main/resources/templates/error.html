@@ -17,8 +17,8 @@
       :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
 
 <main layout:fragment="content">
-    <div class="row font-bold text-black dark:text-white" style="margin-left: 50px" >
-        <h2 style="margin-top: 50px;">Извините, произошла ошибка.</h2>
+    <div class="row m-auto text-2xl font-bold text-black dark:text-white sm:text-title-xl2" >
+        <h2>Извините, произошла ошибка.</h2>
         <h4 style="margin-top: 20px; display:block" th:text="${exception}">Ваш запрос не может быть
             обработан</h4>
         <h4 style="margin-top: 20px;" th:text="${message}">сообщение об ошибке</h4>
