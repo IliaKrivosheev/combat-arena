@@ -49,10 +49,10 @@
                                 №
                             </th>
                             <th id="fromWeightTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
-                                <a href="#" id="sortByFromWeight"><span class="sort-arrow"></span> Вес от</a>
+                                <a href="#" id="sortByFromWeight"><span class="sort-arrow down"></span> Вес от</a>
                             </th>
                             <th id="toWeightTh" class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
-                                <a href="#" id="sortByToWeight"><span class="sort-arrow"></span> Вес до</a>
+                                <a href="#" id="sortByToWeight"><span class="sort-arrow down"></span> Вес до</a>
                             </th>
                             <th id="minTh" class="hidden md:table-cell min-w-[120px] py-4 px-4 font-medium text-black dark:text-white text-center">
                                 Минимальная
@@ -300,7 +300,7 @@
             function changeSortArrow(columnId, sortOrder) {
                 // Убираем активность у предыдущего столбца
                 if (currentSortColumn !== columnId) {
-                    $(".sort-arrow").removeClass("active up down");
+                    $(".sort-arrow").removeClass("active up").addClass("down");
                 }
                 // Устанавливаем активность для текущего столбца
                 $("#" + columnId + " .sort-arrow").addClass("active").removeClass("up down").addClass(sortOrder === 1 ? "up" : "down");
@@ -322,27 +322,6 @@
         });
 
     </script>
-
-    <style>
-        /* Стили для стрелочек */
-        .sort-arrow {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            opacity: 0.5; /* По умолчанию полупрозрачная */
-        }
-        .sort-arrow.active {
-            opacity: 1; /* Полностью видимая при наведении */
-        }
-        .sort-arrow.up {
-            border-bottom: 5px solid black; /* Стрелка вверх */
-        }
-        .sort-arrow.down {
-            border-top: 5px solid black; /* Стрелка вниз */
-        }
-    </style>
 </main>
 
 </body>

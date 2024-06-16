@@ -70,11 +70,11 @@ public class WeightCategoriesController extends BaseController {
         List<WeightCategory> weightCategories = weightCategoryService.getCategoriesByOrganizerUuid();
 
         model.addAttribute(WEIGHT_CATEGORIES_ATTR, weightCategories);
-        return FOLDER_PATH + "weight-categories";
+        return "redirect:/admin/categories/weight";
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public String handlerExceptions(NullPointerException exception, Model model) {
+    @ExceptionHandler(RuntimeException.class)
+    public String handlerExceptions(RuntimeException exception, Model model) {
         log.error("Error: {}", exception.getMessage());
         return errorPage(model, exception.getMessage());
     }

@@ -63,11 +63,11 @@ public class AgeCategoriesController extends BaseController {
         ageCategoryService.delete(uuid);
         List<AgeCategory> ageCategories = ageCategoryService.getCategoriesByOrganizerUuid();
         model.addAttribute(AGE_CATEGORIES_ATTR, ageCategories);
-        return FOLDER_PATH + "age-categories";
+        return "redirect:/admin/categories/age";
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public String handlerExceptions(NullPointerException exception, Model model) {
+    @ExceptionHandler(RuntimeException.class)
+    public String handlerExceptions(RuntimeException exception, Model model) {
         log.error("Error: {}", exception.getMessage());
         return errorPage(model, exception.getMessage());
     }

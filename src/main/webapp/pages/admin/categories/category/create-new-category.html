@@ -217,7 +217,7 @@
                     </div>
 
                     <div class="sm:inline-grid sm:grid-cols-2 gap-4 m-auto">
-                        <button type="submit" id="createButton"
+                        <button type="submit" id="createButton" onclick="setFinalName()"
                                 class="hidden max-w-300px mx-auto w-full md:w-1/2 lg:w-auto mx-auto md:mx-0 inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
                             Создать
                         </button>
@@ -236,6 +236,10 @@
         const selectedValuesMap = new Map();
         const newCategoryBlock = $('#newCategoryBlock');
         const createButton = $('#createButton');
+
+        function setFinalName() {
+            document.getElementById("name").value = document.getElementById("nameTemplate").innerText;
+        }
 
         function handleSelectChange(event, thisEl) {
             const selectElement = event.target;
@@ -303,7 +307,12 @@
         }
 
         function getDefaultCategoryName() {
-            let defaultCategoryName = getAge() + ', синкёкусинкай - ' + getWeight();
+            let defaultCategoryName;
+            if(getType() === 'ката') {
+                defaultCategoryName = getAge() + ', синкёкусинкай - ' + getType();
+            } else {
+                defaultCategoryName = getAge() + ', синкёкусинкай - ' + getWeight();
+            }
             let grade = getGrades();
             if (grade !== '') {
                 defaultCategoryName += ' (' + grade + ')';
@@ -470,9 +479,9 @@
             let maxCategory = weight.attr('weight-max-category');
 
             let weightText;
-            if (minCategory && maxCategory) {
+            if (minCategory === 'true' && maxCategory === 'true') {
                 weightText = 'Абсолюная';
-            } else if (maxCategory) {
+            } else if (maxCategory === 'true') {
                 weightText = fromWeight + '+ кг';
             } else {
                 weightText = toWeight + ' кг';
