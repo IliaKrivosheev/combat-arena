@@ -2,6 +2,7 @@ package com.combat.arena.services.catrgoties;
 
 import com.combat.arena.core.categories.AgeCategory;
 import com.combat.arena.core.repository.categories.AgeCategoryRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,29 +12,9 @@ import static com.combat.arena.services.security.utils.SecurityUtils.getCurrentO
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AgeCategoryService {
-
     private final AgeCategoryRepository ageCategoryRepository;
-
-    public AgeCategoryService(AgeCategoryRepository ageCategoryRepository) {
-        this.ageCategoryRepository = ageCategoryRepository;
-    }
-
-    public void transformAgeCategory(AgeCategory ageCategory) {
-        log.info("Transform Age Category: {}", ageCategory);
-        if(ageCategory.getFromAge() == null) {
-            ageCategory.setFromAge(0);
-        }
-        if(ageCategory.getToAge() == null) {
-            ageCategory.setToAge(0);
-        }
-        if(ageCategory.getFromAge() == 0) {
-            ageCategory.setMinCategory(true);
-        }
-        if(ageCategory.getToAge() == 0) {
-            ageCategory.setMaxCategory(true);
-        }
-    }
 
     public void save(AgeCategory ageCategory) {
         log.info("Save Age Category: {}", ageCategory);
@@ -76,5 +57,21 @@ public class AgeCategoryService {
         String organizerUuid = getCurrentOrganizerUuid();
         if(organizerUuid == null) throw new NullPointerException("Необходимо авторизоваться или указать организатора для данного пользователя!");
         return ageCategoryRepository.findAgeCategoriesByEventOrganizerUuidOrderByFromAge(organizerUuid);
+    }
+
+    private void transformAgeCategory(AgeCategory ageCategory) {
+        log.info("Transform Age Category: {}", ageCategory);
+        if(ageCategory.getFromAge() == null) {
+            ageCategory.setFromAge(0);
+        }
+        if(ageCategory.getToAge() == null) {
+            ageCategory.setToAge(0);
+        }
+        if(ageCategory.getFromAge() == 0) {
+            ageCategory.setMinCategory(true);
+        }
+        if(ageCategory.getToAge() == 0) {
+            ageCategory.setMaxCategory(true);
+        }
     }
 }

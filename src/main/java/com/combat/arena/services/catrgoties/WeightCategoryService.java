@@ -2,6 +2,7 @@ package com.combat.arena.services.catrgoties;
 
 import com.combat.arena.core.categories.WeightCategory;
 import com.combat.arena.core.repository.categories.WeightCategoryRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,29 +12,9 @@ import static com.combat.arena.services.security.utils.SecurityUtils.getCurrentO
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class WeightCategoryService {
-
     private final WeightCategoryRepository weightCategoryRepository;
-
-    public WeightCategoryService(WeightCategoryRepository weightCategoryRepository) {
-        this.weightCategoryRepository = weightCategoryRepository;
-    }
-
-    public void transformWeightCategory(WeightCategory weightCategory) {
-        log.info("Transform Weight Category: {}", weightCategory);
-        if(weightCategory.getFromWeight() == null) {
-            weightCategory.setFromWeight(0.);
-        }
-        if(weightCategory.getToWeight() == null) {
-            weightCategory.setToWeight(0.);
-        }
-        if(weightCategory.getFromWeight().equals(0.)) {
-            weightCategory.setMinCategory(true);
-        }
-        if(weightCategory.getToWeight().equals(0.)) {
-            weightCategory.setMaxCategory(true);
-        }
-    }
 
     public void save(WeightCategory weightCategory) {
         log.info("Save Weight Category: {}", weightCategory);
@@ -75,5 +56,21 @@ public class WeightCategoryService {
         String organizerUuid = getCurrentOrganizerUuid();
         if(organizerUuid == null) throw new NullPointerException("Необходимо авторизоваться или указать организатора для данного пользователя!");
         return weightCategoryRepository.findWeightCategoriesByEventOrganizerUuidOrderByFromWeight(organizerUuid);
+    }
+
+    private void transformWeightCategory(WeightCategory weightCategory) {
+        log.info("Transform Weight Category: {}", weightCategory);
+        if(weightCategory.getFromWeight() == null) {
+            weightCategory.setFromWeight(0.);
+        }
+        if(weightCategory.getToWeight() == null) {
+            weightCategory.setToWeight(0.);
+        }
+        if(weightCategory.getFromWeight().equals(0.)) {
+            weightCategory.setMinCategory(true);
+        }
+        if(weightCategory.getToWeight().equals(0.)) {
+            weightCategory.setMaxCategory(true);
+        }
     }
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%mdc{visitorId}][%level][%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE_ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>../logs/combat-arena/combat-arena.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>[%d{HH:mm:ss.SSS}][%mdc{visitorId}][%level][%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>username</key>
+            <defaultValue>unknown</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${username}" class="ch.qos.logback.core.FileAppender">
+                <file>../logs/combat-arena/visitors/${username}.log</file>
+                <append>true</append>
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%level][%mdc{visitorId}][%file:%line] - %msg%n</pattern>
+                </layout>
+            </appender>
+        </sift>
+    </appender>
+
+    <appender name="FILE_ERRORS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>../logs/combat-arena/exceptions.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>[%d{HH:mm:ss.SSS}][%mdc{visitorId}][%level][%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>../logs/combat-arena/warnings.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>[%d{HH:mm:ss.SSS}][%mdc{visitorId}][%level][%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>../logs/combat-arena/information.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>[%d{HH:mm:ss.SSS}][%mdc{visitorId}][%level][%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.combat.arena" level="DEBUG"/>
+    <logger name="org.thymeleaf" level="DEBUG"/>
+    <logger name="org.thymeleaf.TemplateEngine.TIMER" level="TRACE"/>
+    <logger name="org.springframework.jndi" level="WARN" />
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+    <logger name="org.apache.catalina.connector.OutputBuffer" level="OFF"/>
+    <logger name="org.springframework.boot.context.web.ErrorPageFilter" level="OFF"/>
+    <logger name="org.springframework.boot.web.support.ErrorPageFilter" level="OFF"/>
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="SIFT"/>
+        <appender-ref ref="FILE_ALL"/>
+        <appender-ref ref="FILE_WARN"/>
+        <appender-ref ref="FILE_ERRORS"/>
+        <appender-ref ref="FILE_INFO"/>
+    </root>
+
+</configuration>

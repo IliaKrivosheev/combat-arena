@@ -21,13 +21,14 @@ server:
     threads:
       max: 25
 
-logging:
-  level:
-    com.combat.arena: debug
-    org.thymeleaf: warn
-    org.thymeleaf.TemplateEngine.TIMER: warn
-    org.springframework.jndi: warn
-    org.org.hibernate: error
+#logging:
+#  config: classpath:logback.xml
+#  level:
+#    com.combat.arena: debug
+#    org.thymeleaf: warn
+#    org.thymeleaf.TemplateEngine.TIMER: warn
+#    org.springframework.jndi: warn
+#    org.org.hibernate: error
 
 #    url: jdbc:postgresql://localhost:5432/combat-arena
 #    username: combat-arena-admin
