@@ -1,4 +1,4 @@
-package com.combat.arena.core;
+package com.combat.arena.core.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.combat.arena.core.common.AbstractAuditingEntity;

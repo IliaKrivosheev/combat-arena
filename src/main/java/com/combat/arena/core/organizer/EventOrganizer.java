@@ -1,4 +1,4 @@
-package com.combat.arena.core;
+package com.combat.arena.core.organizer;
 
 import com.combat.arena.core.common.AbstractAuditingEntity;
 import jakarta.persistence.Column;

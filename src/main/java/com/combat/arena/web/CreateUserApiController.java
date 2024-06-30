@@ -1,8 +1,8 @@
 package com.combat.arena.web;
 
-import com.combat.arena.core.EventOrganizer;
-import com.combat.arena.core.Role;
-import com.combat.arena.core.User;
+import com.combat.arena.core.organizer.EventOrganizer;
+import com.combat.arena.core.security.Role;
+import com.combat.arena.core.security.User;
 import com.combat.arena.core.repository.EventOrganizerRepository;
 import com.combat.arena.core.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;

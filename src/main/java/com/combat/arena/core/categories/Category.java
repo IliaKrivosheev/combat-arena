@@ -13,12 +13,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@ToString
-@Setter
-@Getter
 @EqualsAndHashCode(callSuper = true)
 public class Category extends AbstractAuditingEntity implements Serializable {
 

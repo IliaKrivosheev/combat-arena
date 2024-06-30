@@ -1,4 +1,4 @@
-package com.combat.arena.core;
+package com.combat.arena.core.security;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

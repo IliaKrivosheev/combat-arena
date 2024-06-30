@@ -1,6 +1,6 @@
 package com.combat.arena.services.security;
 
-import com.combat.arena.core.User;
+import com.combat.arena.core.security.User;
 import com.combat.arena.core.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

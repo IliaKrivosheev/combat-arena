@@ -1,7 +1,7 @@
 package com.combat.arena.services.security.utils;
 
-import com.combat.arena.core.Role;
-import com.combat.arena.core.User;
+import com.combat.arena.core.security.Role;
+import com.combat.arena.core.security.User;
 import com.combat.arena.services.security.AuthoritiesConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

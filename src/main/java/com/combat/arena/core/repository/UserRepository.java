@@ -1,6 +1,6 @@
 package com.combat.arena.core.repository;
 
-import com.combat.arena.core.User;
+import com.combat.arena.core.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
