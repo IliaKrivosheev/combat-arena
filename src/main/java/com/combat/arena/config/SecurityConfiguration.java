@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/resources/css/**").permitAll()
                         .requestMatchers("/resources/js/**").permitAll()
                         .requestMatchers("/resources/images/**").permitAll()
-                        .requestMatchers("/signup").anonymous()
+                        .requestMatchers("/admin/signup").anonymous()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form

@@ -2,6 +2,7 @@ package com.combat.arena.config;
 
 import lombok.extern.slf4j.Slf4j;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -13,6 +14,7 @@ import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 
 @Slf4j
 @Configuration
+@EnableConfigurationProperties(FileSystemYamlProperties.class)
 public class ThymeleafConfiguration {
 
     @Bean

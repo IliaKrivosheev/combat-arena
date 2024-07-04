@@ -15,6 +15,9 @@ spring:
     enable-spring-el-compiler: true
     enabled: true
 
+filesystem:
+  userResourcesPath: D:\Development\userresources\
+
 server:
   port: 8080
   tomcat:
