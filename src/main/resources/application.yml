@@ -3,7 +3,7 @@ spring:
     name: fsknso-competition
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/combat-arena
+    url: jdbc:postgresql:// :5432/combat-arena
     username: combat-arena-admin
     password: cfbf6b2e-41d6-4a1e-af9a-955082faf1d1
   jpa:
@@ -35,5 +35,8 @@ server:
 
 #    url: jdbc:postgresql://localhost:5432/combat-arena
 #    username: combat-arena-admin
+logging:
+  level:
+    com.combat.arena: debug
 
 #    password: cfbf6b2e-41d6-4a1e-af9a-955082faf1d1

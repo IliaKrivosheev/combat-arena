@@ -10,11 +10,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Slf4j
@@ -43,10 +45,12 @@ public class CreateUserApiController {
             Role role = new Role(rolesArray.getString(i));
             userRoles.add(role);
         }
+        String eventOrganizerUuid = userJson.getString("eventOrganizerUuid");
         User newUser = new User();
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setEmail(email);
         newUser.setRoles(userRoles);
+        newUser.setEventOrganizerUuid(eventOrganizerUuid);
         newUser = repository.save(newUser);
         log.debug("newUser: {}", newUser);
         return "User is saved";
@@ -62,5 +66,11 @@ public class CreateUserApiController {
         newEventOrganizer = eventOrganizerRepository.save(newEventOrganizer);
         log.debug("newEventOrganizer: {}", newEventOrganizer);
         return "EventOrganizer is saved";
+    }
+    @GetMapping("api/event-organizers")
+    public List<EventOrganizer> getEventOrganizers() {
+        List<EventOrganizer> eventOrganizers = eventOrganizerRepository.findAll();
+        log.debug("eventOrganizers: {}", eventOrganizers);
+        return eventOrganizers;
     }
 }
