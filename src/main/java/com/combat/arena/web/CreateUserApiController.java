@@ -5,6 +5,7 @@ import com.combat.arena.core.security.Role;
 import com.combat.arena.core.security.User;
 import com.combat.arena.core.repository.EventOrganizerRepository;
 import com.combat.arena.core.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,17 +22,11 @@ import java.util.Set;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class CreateUserApiController {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final EventOrganizerRepository eventOrganizerRepository;
-
-    @Autowired
-    public CreateUserApiController(UserRepository repository, PasswordEncoder passwordEncoder, EventOrganizerRepository eventOrganizerRepository) {
-        this.repository = repository;
-        this.passwordEncoder = passwordEncoder;
-        this.eventOrganizerRepository = eventOrganizerRepository;
-    }
 
     @PostMapping("api/new-user")
     public String addUser(@RequestBody String user) {

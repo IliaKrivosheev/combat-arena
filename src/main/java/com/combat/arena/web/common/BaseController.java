@@ -22,4 +22,7 @@ public class BaseController {
         model.asMap().clear();
         return "redirect:" + url;
     }
+    protected String doRedirect(String url) {
+        return "redirect:" + url;
+    }
 }

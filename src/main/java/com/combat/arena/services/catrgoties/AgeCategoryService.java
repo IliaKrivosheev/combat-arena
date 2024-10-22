@@ -31,7 +31,7 @@ public class AgeCategoryService {
         log.info("Update Age Category. Uuid: {}, New Data: {}", uuid, ageCategory);
 
         AgeCategory category = ageCategoryRepository.findByUuid(uuid);
-        if(category == null) throw new NullPointerException("Ошибка обноваления категории");
+        if(category == null) throw new NullPointerException("Ошибка обновления категории");
 
         transformAgeCategory(ageCategory);
 
